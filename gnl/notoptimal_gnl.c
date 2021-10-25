@@ -43,7 +43,7 @@ void ft_push_char(t_string *the_line, char c)
 {
 	(the_line->array)[the_line->size - 1] = c;
 	the_line->size += 1;
-	printf("%d %d\n", the_line->size, the_line->memory);
+	// printf("%d %d\n", the_line->size, the_line->memory);
 	if (the_line->size == the_line->memory)
 	{
 		the_line->array = ft_realloc(the_line->array, the_line->size * 2);
@@ -59,32 +59,53 @@ void ft_push_char(t_string *the_line, char c)
 
 char *notoptimal_get_next_line(int fd)
 {
-	char buf;
-	int i;
+	static char buf[BUFFER_SIZE];
+	static int i = 0;
 	char *res;
 	int count;
 
 	t_string *the_line;
 	the_line = (t_string *)malloc(sizeof(t_string)); // if malloc == 0
-	the_line->array = (char *)malloc(10); // if malloc == 0
+	the_line->array = (char *)malloc(BUFFER_SIZE + 1); // if malloc == 0
 	the_line->array[0] = '\0';
 	the_line->size = 1;
-	the_line->memory = 10;
-
-	if (read(fd, &buf, 1) == 0)
+	the_line->memory = BUFFER_SIZE + 1;
+	// printf("(73) i = %d\n", i);
+	while (i < BUFFER_SIZE && buf[i] != '\n' && buf[i] != '\0')
 	{
-		free(the_line->array);
-		free(the_line);
-		return (0);
+		ft_push_char(the_line, buf[i]);
+		i++;
 	}
-	while (1)
+	if (i < BUFFER_SIZE && buf[i] == '\n')
+		ft_push_char(the_line, buf[i]);
+	if ((i == 0 || buf[i] != '\0') && (buf[i] != '\n' || i == BUFFER_SIZE))
 	{
-		if (buf == '\n')
-			break ;
-		ft_push_char(the_line, buf);
-		if (read(fd, &buf, 1) == 0)
-			break ;
+		count = read(fd, buf, BUFFER_SIZE);
+		if (count == 0)
+		{
+			free(the_line->array);
+			free(the_line);
+			return (0);
+		}
+		while (count)
+		{
+			i = 0;
+			while (i < count && buf[i] != '\n' && buf[i] != '\0')
+			{
+				ft_push_char(the_line, buf[i]);
+				i++;
+			}
+			// printf("the_line = %s\n", the_line->array);
+			// printf("(97) count = %d\n", count);
+			if (i < count && buf[i] == '\n')
+			{
+				ft_push_char(the_line, buf[i]);
+				break ;
+			}
+			count = read(fd, buf, BUFFER_SIZE);
+		}
 	}
+	i++;
 	(the_line->array)[the_line->size - 1] = '\0';
 	res = ft_strdup(the_line->array);
 	free(the_line->array);
@@ -94,16 +115,25 @@ char *notoptimal_get_next_line(int fd)
 
 int main(int argc, char ** argv)
 {
-    char *the_line;
+	char *the_line;
+	char *the_line2;
+	char *the_line3;
+	char *the_line4;
 	int fd;
 
 	if (argc == 1)
 		fd = 0;
 	else
 		fd = open(argv[1], O_RDONLY);
-    the_line = notoptimal_get_next_line(fd);
-    printf("%s", the_line);
+	the_line = notoptimal_get_next_line(fd);
+	the_line2 = notoptimal_get_next_line(fd);
+	the_line3 = notoptimal_get_next_line(fd);
+	the_line4 = notoptimal_get_next_line(fd);
+	printf("%s", the_line);
+	printf("%s", the_line2);
+	printf("%s", the_line3);
+	printf("%s", the_line4);
 
 	// close(fd);
-    return (0);
+	return (0);
 }
