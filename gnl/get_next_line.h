@@ -18,7 +18,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
 
 # ifndef BUFFER_SIZE
-#  define	BUFFER_SIZE 10
+#  define	BUFFER_SIZE 15
 # endif
 
 #endif

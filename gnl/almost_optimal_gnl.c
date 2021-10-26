@@ -43,7 +43,6 @@ void ft_push_char(t_string *the_line, char c)
 {
 	(the_line->array)[the_line->size - 1] = c;
 	the_line->size += 1;
-	// printf("%d %d\n", the_line->size, the_line->memory);
 	if (the_line->size == the_line->memory)
 	{
 		the_line->array = ft_realloc(the_line->array, the_line->size * 2);
@@ -51,11 +50,6 @@ void ft_push_char(t_string *the_line, char c)
 	}
 	(the_line->array)[the_line->size] = '\0';
 }
-
-// пишу функцию, которая читает по 1 символу из файла/ввода, записывает по 1 символу в массив и возвращает этот массив.
-// для массива нужно выделить память, и я выделяю 10 ячеек памяти изначально, потом заполнив их снова выделяю 10 ячеек/
-// в структуре есть три поля: массив его длина и выделенная память/
-// заполняю массив по 1 символу и увеличиваю размер/ если размер равен количеству выделенной памяти снова выделяю 10 ячеек/
 
 char *notoptimal_get_next_line(int fd)
 {
@@ -70,14 +64,14 @@ char *notoptimal_get_next_line(int fd)
 	the_line->array[0] = '\0';
 	the_line->size = 1;
 	the_line->memory = BUFFER_SIZE + 1;
-	// printf("(73) i = %d\n", i);
 	while (i < BUFFER_SIZE && buf[i] != '\n' && buf[i] != '\0')
 	{
 		ft_push_char(the_line, buf[i]);
+		if (i < BUFFER_SIZE && buf[i] == '\n')
+			ft_push_char(the_line, buf[i]);
 		i++;
 	}
-	if (i < BUFFER_SIZE && buf[i] == '\n')
-		ft_push_char(the_line, buf[i]);
+	printf("(74) i = %d\n", i);
 	if ((i == 0 || buf[i] != '\0') && (buf[i] != '\n' || i == BUFFER_SIZE))
 	{
 		count = read(fd, buf, BUFFER_SIZE);
@@ -90,19 +84,20 @@ char *notoptimal_get_next_line(int fd)
 		while (count)
 		{
 			i = 0;
+			printf("(88) i = %d\n", i);
 			while (i < count && buf[i] != '\n' && buf[i] != '\0')
 			{
 				ft_push_char(the_line, buf[i]);
 				i++;
 			}
-			// printf("the_line = %s\n", the_line->array);
-			// printf("(97) count = %d\n", count);
+			printf("(94) i = %d, count = %d, buf = %s\n", i, count, buf);
 			if (i < count && buf[i] == '\n')
 			{
 				ft_push_char(the_line, buf[i]);
 				break ;
 			}
 			count = read(fd, buf, BUFFER_SIZE);
+			printf("count = %d\n", count);
 		}
 	}
 	i++;
@@ -118,7 +113,11 @@ int main(int argc, char ** argv)
 	char *the_line;
 	char *the_line2;
 	char *the_line3;
-	char *the_line4;
+	// char *the_line4;
+	// char *the_line5;
+	// char *the_line6;
+	// char *the_line7;
+	// char *the_line8;
 	int fd;
 
 	if (argc == 1)
@@ -128,11 +127,19 @@ int main(int argc, char ** argv)
 	the_line = notoptimal_get_next_line(fd);
 	the_line2 = notoptimal_get_next_line(fd);
 	the_line3 = notoptimal_get_next_line(fd);
-	the_line4 = notoptimal_get_next_line(fd);
+	// the_line4 = notoptimal_get_next_line(fd);
+	// the_line5 = notoptimal_get_next_line(fd);
+	// the_line6 = notoptimal_get_next_line(fd);
+	// the_line7 = notoptimal_get_next_line(fd);
+	// the_line8 = notoptimal_get_next_line(fd);
 	printf("%s", the_line);
 	printf("%s", the_line2);
 	printf("%s", the_line3);
-	printf("%s", the_line4);
+	// printf("%s", the_line4);
+	// printf("%s", the_line5);
+	// printf("%s", the_line6);
+	// printf("%s", the_line7);
+	// printf("%s", the_line8);
 
 	// close(fd);
 	return (0);
