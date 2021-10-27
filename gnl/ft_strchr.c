@@ -6,11 +6,12 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 14:57:00 by mgwyness          #+#    #+#             */
-/*   Updated: 2021/10/13 14:24:43 by mgwyness         ###   ########.fr       */
+/*   Updated: 2021/10/27 16:25:07 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
+#include <stdio.h>
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -20,6 +21,7 @@ char	*ft_strchr(const char *s, int c)
 
 	i = 0;
 	arr = (char *)s;
+	printf("s = %s\n", arr);
 	len = ft_strlen(arr);
 	while (i <= len)
 	{

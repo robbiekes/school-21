@@ -13,9 +13,11 @@ typedef struct s_string
 } t_string;
 
 char	*notoptimal_get_next_line(int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
+char	*ft_next_line(char *reserved);
+char	*ft_strchr(const char *s, int c);
 
 # ifndef BUFFER_SIZE
 #  define	BUFFER_SIZE 15
