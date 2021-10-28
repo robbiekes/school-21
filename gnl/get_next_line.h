@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h> // remove
 
 typedef struct s_string
 {
@@ -12,12 +13,16 @@ typedef struct s_string
 	int memory;
 } t_string;
 
-char	*notoptimal_get_next_line(int fd);
-char	*ft_strjoin(char *s1, char *s2);
+char	*ft_gnl(int fd);
+char	*ft_read_bytes(int fd, char *reserved);
+char	*ft_create_line(char *reserved);
+void	ft_cut_str(char *reserved);
+
+char	*ft_strjoin(char *s1, char *s2, int count);
+char	*ft_strncat(char *dst, const char *src, size_t n);
+char	*ft_strchr(char *s, int c);
 size_t	ft_strlen(const char *s);
-char	*ft_strdup(const char *s1);
-char	*ft_next_line(char *reserved);
-char	*ft_strchr(const char *s, int c);
+
 
 # ifndef BUFFER_SIZE
 #  define	BUFFER_SIZE 15
