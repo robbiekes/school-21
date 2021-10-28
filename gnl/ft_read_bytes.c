@@ -151,10 +151,10 @@ char *ft_read_bytes(int fd, char *reserved)
 		if (count <= 0)
 		{
 			free(buf);
-			if (count == 0)
-				return (reserved);
-			if (count == -1)
-				return (0);
+			// printf("(154) count -> %d resered -> (%s)\n", count, reserved);
+			if (count == 0 && reserved[0] != '\0')
+				return (reserved);	
+			return (0);
 		}
 		reserved = ft_strjoin(reserved, buf, count);
 	}
@@ -170,6 +170,8 @@ char *ft_gnl(fd)
 
 	arr = malloc(sizeof(char) * 42);
 	reserved = ft_read_bytes(fd, reserved);
+	if (reserved == 0)
+		return (0);
 	arr = ft_make_line(reserved);
 	return (arr);
 }
