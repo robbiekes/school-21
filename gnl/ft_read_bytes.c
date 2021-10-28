@@ -51,14 +51,14 @@ char	*ft_strchr(char *s, int c)
 	return (0);
 }
 
-static char	*ft_strcat(char *dst, const char *src)
+static char	*ft_strncat(char *dst, const char *src, size_t n)
 {
 	size_t	i;
 	int		len_d;
 
 	i = 0;
 	len_d = ft_strlen(dst);
-	while (src[i] != '\0')
+	while (i < n && src[i] != '\0')
 	{
 		dst[len_d + i] = src[i];
 		i++;
@@ -67,22 +67,20 @@ static char	*ft_strcat(char *dst, const char *src)
 	return (dst);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2, int count)
 {
 	char	*arr;
 	int		len_s1;
-	int		len_s2;
 
 	if (s1 == 0 || s2 == 0)
 		return (0);
 	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	arr = (char *)malloc(sizeof(char) * (len_s1 + len_s2) + 1);
+	arr = (char *)malloc(sizeof(char) * (len_s1 + count) + 1);
 	if (arr == 0)
 		return (0);
 	arr[0] = 0;
-	ft_strcat(arr, s1);
-	ft_strcat(arr, s2);
+	ft_strncat(arr, s1, -1);
+	ft_strncat(arr, s2, count);
 	free(s1);
 	return (arr);
 }
@@ -109,13 +107,13 @@ char *ft_make_line(char *reserved)
 	int i = 0;
 	int len = 0;
 	char *str;
-	while (reserved[len] != '\n' || reserved[len] != '\0')
+	while (reserved[len] != '\n' && reserved[len] != '\0')
 		len++;
 	if (reserved[len] == '\n')
 		str = (char *)malloc(sizeof(char) * (len + 2));
 	else
 		str = (char *)malloc(sizeof(char) * (len + 1));
-	while (reserved[i] != '\n' || reserved[i] != '\0')
+	while (reserved[i] != '\n' && reserved[i] != '\0')
 	{
 		str[i] = reserved[i];
 		i++;
@@ -158,7 +156,7 @@ char *ft_read_bytes(int fd, char *reserved)
 			if (count == -1)
 				return (0);
 		}
-		reserved = ft_strjoin(reserved, buf);
+		reserved = ft_strjoin(reserved, buf, count);
 	}
 	free(buf);
 	return (reserved);
