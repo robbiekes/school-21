@@ -27,5 +27,6 @@ int main(int argc, char **argv)
 	printf("%s", the_line);
 	// printf("%s", the_line2);
 	// printf("%s", the_line3);
+	free(the_line);
 	return (0);
 }

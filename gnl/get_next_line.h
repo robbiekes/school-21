@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#include <stdio.h> // remove
+
 typedef struct s_string
 {
 	char *array;
@@ -14,7 +16,7 @@ typedef struct s_string
 
 char	*get_next_line(int fd);
 char	*ft_read_bytes(int fd, char *reserved);
-char	*ft_create_line(char *reserved);
+char	*ft_create_line(char **reserved);
 void	ft_cut_str(char *reserved);
 
 char	*ft_strjoin(char *s1, char *s2, int count);
