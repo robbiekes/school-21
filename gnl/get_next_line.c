@@ -2,9 +2,11 @@
 
 void ft_cut_str(char *reserved)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
 
+	i = 0;
+	j = 0;
 	while (reserved[i] != '\n')
 		i++;
 	i++;
@@ -19,20 +21,21 @@ void ft_cut_str(char *reserved)
 
 char *ft_create_line(char *reserved)
 {
-	int i = 0;
-	int len = 0;
-	char *str;
+	int		i;
+	int		len;
+	char	*str;
+
+	i = 0;
+	len = 0;
 	while (reserved[len] != '\n' && reserved[len] != '\0')
 		len++;
 	if (reserved[len] == '\n')
 		str = (char *)malloc(sizeof(char) * (len + 2));
 	else
 		str = (char *)malloc(sizeof(char) * (len + 1));
+	len = 0;
 	while (reserved[i] != '\n' && reserved[i] != '\0')
-	{
-		str[i] = reserved[i];
-		i++;
-	}
+		str[i++] = reserved[len++];
 	if (reserved[i] == '\0')
 	{
 		str[i] = '\0';
@@ -51,10 +54,8 @@ char *ft_read_bytes(int fd, char *reserved)
 {
 	int		count;
 	char	*buf;
-	int		i;
 
 	count = 0;
-	i = 0;
 	if (reserved == 0)
 	{
 		reserved = (char *)malloc(sizeof(char));
