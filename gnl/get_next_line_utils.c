@@ -57,5 +57,6 @@ char	*ft_strjoin(char *s1, char *s2, int count)
 	ft_strncat(arr, s1, -1);
 	ft_strncat(arr, s2, count);
 	free(s1);
+	printf("(utils 61) free %p\n", s1);
 	return (arr);
 }

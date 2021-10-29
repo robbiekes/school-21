@@ -13,7 +13,7 @@ typedef struct s_string
 	int memory;
 } t_string;
 
-char	*ft_gnl(int fd);
+char	*get_next_line(int fd);
 char	*ft_read_bytes(int fd, char *reserved);
 char	*ft_create_line(char *reserved);
 void	ft_cut_str(char *reserved);
