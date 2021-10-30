@@ -1,18 +1,16 @@
-#ifndef GET_NEXT_LINE
-# define GET_NEXT_LINE
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-#include <stdio.h> // remove
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 typedef struct s_string
 {
-	char *array;
-	int size;
-	int memory;
-} t_string;
+	char	*array;
+	int		size;
+	int		memory;
+}			t_string;
 
 char	*get_next_line(int fd);
 char	*ft_read_bytes(int fd, char *reserved);
@@ -24,9 +22,8 @@ char	*ft_strncat(char *dst, const char *src, size_t n);
 char	*ft_strchr(char *s, int c);
 size_t	ft_strlen(const char *s);
 
-
 # ifndef BUFFER_SIZE
-#  define	BUFFER_SIZE 15
+#  define BUFFER_SIZE 15
 # endif
 
 #endif
