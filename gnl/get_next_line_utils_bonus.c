@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: doalbaco <doalbaco@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/30 19:37:38 by mgwyness          #+#    #+#             */
-/*   Updated: 2021/11/01 16:03:32 by doalbaco         ###   ########.fr       */
+/*   Created: 2021/11/01 17:18:22 by mgwyness          #+#    #+#             */
+/*   Updated: 2021/11/01 17:18:22 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
