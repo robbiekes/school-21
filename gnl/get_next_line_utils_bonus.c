@@ -6,11 +6,11 @@
 /*   By: doalbaco <doalbaco@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 19:37:38 by mgwyness          #+#    #+#             */
-/*   Updated: 2021/11/01 15:51:36 by doalbaco         ###   ########.fr       */
+/*   Updated: 2021/11/01 16:03:32 by doalbaco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {

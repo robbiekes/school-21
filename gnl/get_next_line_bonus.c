@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_read_fill(char *buf, char *reserved, int fd)
 {
@@ -69,7 +69,7 @@ char	*ft_create_line(char **reserved)
 		*reserved = 0;
 	}
 	str[i] = '\n';
-	str[i + ((*reserved) && (*reserved)[i] == '\n')] = '\0';
+	str[i + ((*reserved) && ((*reserved)[i] == '\n'))] = '\0';
 	ft_cut_str(*reserved);
 	return (str);
 }
@@ -97,14 +97,14 @@ char	*ft_read_bytes(int fd, char *reserved)
 
 char	*get_next_line(int fd)
 {
-	static char	*reserved = 0;
+	static char	*reserved[OPEN_MAX];
 	char		*arr;
 
-	reserved = ft_read_bytes(fd, reserved);
-	if (reserved == 0)
+	reserved[fd] = ft_read_bytes(fd, reserved[fd]);
+	if (reserved[fd] == 0)
 	{
 		return (0);
 	}
-	arr = ft_create_line(&reserved);
+	arr = ft_create_line(&reserved[fd]);
 	return (arr);
 }
