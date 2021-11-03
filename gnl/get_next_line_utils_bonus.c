@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 17:18:22 by mgwyness          #+#    #+#             */
-/*   Updated: 2021/11/01 17:18:22 by mgwyness         ###   ########.fr       */
+/*   Created: 2021/11/03 16:47:04 by mgwyness          #+#    #+#             */
+/*   Updated: 2021/11/03 16:47:04 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
