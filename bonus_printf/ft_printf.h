@@ -7,11 +7,10 @@
 
 typedef struct s_args
 {
-	char conversion;
-	int width;
-	int precision;
-} t_args;
-
+	char	conversion;
+	int		width;
+	int		precision;
+}			t_args;
 
 
 #endif
