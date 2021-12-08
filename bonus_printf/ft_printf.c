@@ -89,37 +89,37 @@ int print_s(char *str, t_args *args)
 	count = 0;
 	if (!str)
 	{
-		if (args->precision == 0 || args->precision > 6)
+		if (args->precision >= 0 || args->precision > 6)
 			args->precision = 6;
 		while (count < (args->width - args->precision))
 			count += write(1, " ", 1);
-		write(1, "(null)", args->precision);
-		return (args->precision);
+		count += write(1, "(null)", args->precision);
+		return (count);
 	}
-	if (args->width >= args->precision || args->width >= my_strlen(str))
+	if (args->width >= args->precision && args->width >= my_strlen(str))
 	{
 		if (args->precision >= my_strlen(str) || args->precision == 0)
 			args->precision = my_strlen(str);
 		while (count < (args->width - args->precision))
 			count += write(1, " ", 1);
 	}
-	else
-	{
 		while (count < (args->width - my_strlen(str)))
 			count += write(1, " ", 1);
-	}
-	if (args->precision == 0)
-		count += ft_putstr(str, my_strlen(str));
-	else
+	if (args->precision <= my_strlen(str) && args->precision != 0)
 		count += ft_putstr(str, args->precision);
+	else if (args->precision != 0 || args->width > 0)
+		count += ft_putstr(str, my_strlen(str));
 	return (count);
 }
 
 int print_d(int num, t_args *args)
 {
 	int	count;
+	int skip;
 
 	count = 0;
+	if (args->precision == 0 && args->width == 0 && num == 0)
+		skip = 1;
 	if (args->precision <= ft_numlen(num))
 		args->precision = 0;
 	if (args->width > args->precision)
@@ -134,7 +134,7 @@ int print_d(int num, t_args *args)
 			count += write(1, "0", 1);
 		count += ft_putnbr(num);
 	}
-	//else
+	else if (!skip)
 		count += ft_putnbr(num);
 	return (count);
 }
@@ -159,7 +159,6 @@ int handle_argument(const char *string, t_args *args)
 	i = 0;
 	dot = 0;
 	args->width = 0;
-	args->precision = 0;
 	i = 0;
 	if (string[i] >= '0' && string[i] <= '9')
 	{
@@ -167,7 +166,9 @@ int handle_argument(const char *string, t_args *args)
 		while (string[i] >= '0' && string[i] <= '9')
 			i++;
 	}
-	if (string[i] == '.' && string[i + 1] >= '0' && string[i + 1] <= '9')
+	if (string[i] != '.')
+		args->precision = 0;
+	else if (string[i] == '.' && string[i + 1] >= '0' && string[i + 1] <= '9')
 	{
 		i++;
 		args->precision = my_atoi(&string[i]);
@@ -206,7 +207,11 @@ int ft_printf(const char *format, ...)
 
 int main(void)
 {
-	printf("orig = %.0d %.0d %.0d %.0d %.0d %.0d %.0d %.0d\n", 0, 42, 1, 4554, 2147483647, (int)2147483648, (int)-2147483648, (int)-2147483649);
-	ft_printf("ft   = %.0d %.0d %.0d %.0d %.0d %.0d %.0d %.0d\n", 0, 42, 1, 4554, 2147483647, (int)2147483648, (int)-2147483648, (int)-2147483649);
+	int orig = 0;
+	int ft = 0;
+	orig = printf("orig = %0s %0s %0s %0s %0s\n", "", "toto", "0123456789", "tjehurthteutuiehteute", NULL);
+	ft = ft_printf("ft   = %0s %0s %0s %0s %0s\n", "", "toto", "0123456789", "tjehurthteutuiehteute", NULL);
+	printf("orig len = %d\n", orig);
+	printf("ft len = %d\n", ft);
 }
 
