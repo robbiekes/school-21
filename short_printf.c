@@ -14,7 +14,7 @@ static void ft_putnbr(long n, int base_len, char *base)
 {
     if (n >= base_len)
         ft_putnbr(n / base_len, base_len, base);
-    write(1, &base[n %base_len], 1);
+    write(1, &base[n % base_len], 1);
 }
 int ft_printf(const char *format, ...)
 {

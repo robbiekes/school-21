@@ -134,7 +134,6 @@ int print_d(int num, t_args *args)
 			count += write(1, "0", 1);
 		count += ft_putnbr(num);
 	}
-	//else
 		count += ft_putnbr(num);
 	return (count);
 }
@@ -206,7 +205,7 @@ int ft_printf(const char *format, ...)
 
 int main(void)
 {
-	printf("orig = %.0d %.0d %.0d %.0d %.0d %.0d %.0d %.0d\n", 0, 42, 1, 4554, 2147483647, (int)2147483648, (int)-2147483648, (int)-2147483649);
-	ft_printf("ft   = %.0d %.0d %.0d %.0d %.0d %.0d %.0d %.0d\n", 0, 42, 1, 4554, 2147483647, (int)2147483648, (int)-2147483648, (int)-2147483649);
+	printf("orig = %0d %0d %0d %0d %0d %0d %0d %.0d\n", 0, 42, 1, 4554, 2147483647, (int)2147483648, (int)-2147483648, (int)-2147483649);
+	ft_printf("ft   = %0d %0d %0d %0d %0d %0d %0d %.0d\n", 0, 42, 1, 4554, 2147483647, (int)2147483648, (int)-2147483648, (int)-2147483649);
 }
 
