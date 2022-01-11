@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 16:46:56 by mgwyness          #+#    #+#             */
-/*   Updated: 2021/11/03 16:46:56 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/11 17:14:15 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
 
 int	ft_str_len(char *reserved)
 {

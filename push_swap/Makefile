@@ -9,9 +9,10 @@ SRCDIR = ./srcs/
 OBJDIR = ./obj/
 INCDIR = ./includes/
 LIBFTDIR = ./libft/
-BONUSDIR = ./checker/
+# BONUSDIR = ./checker/
 
 SRCS = push_swap.c \
+	parsing.c \
 	pars_funcs.c \
 	algorithm.c	\
 	free_lists.c \
@@ -26,13 +27,24 @@ SRCS = push_swap.c \
 
 OBJ = $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
-BONUSSRCS = 
+BONUSSRCS = checker.c \
+	get_next_line.c \
+	get_next_line_utils.c \
+	parsing.c \
+	pars_funcs.c \
+	free_lists.c \
+	push.c \
+	regular_func.c \
+	reverses.c \
+	rotations.c	\
+	rotations2.c \
+	swaps.c	\
+	utils.c \
+	ft_split.c
+
 BONUSOBJ = $(addprefix $(OBJDIR), $(BONUSSRCS:.c=.o))
 
-
 all: $(NAME)
-
-
 
 $(OBJDIR)%.o : $(SRCDIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@ -O2 -I$(INCDIR)

@@ -1,7 +1,7 @@
 import random
 import os
 
-length = 1000
+length = 500
 repeats = 10
 numbers = list(range(1, length + 1))
 

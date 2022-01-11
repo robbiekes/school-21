@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 21:23:04 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/06 15:02:42 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/11 17:25:25 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,37 +68,40 @@ void	pop_front(t_handle *handle, char which_stack)
 	}
 }
 
-void	ft_pa(t_handle *handle)
+void	ft_pa(t_handle *handle, int flag)
 {
 	t_stack	*temp;
+
+	if (flag)
+		write(1, "pa\n", 3);
+	if (!handle->b)
+		return ;
+	temp = handle->b;
+	handle->b = handle->b->next;
 	if (handle->b)
+		handle->b->prev = temp->prev;
+	if (handle->a == 0)
 	{
-		temp = handle->b;
-		handle->b = handle->b->next;
-		if (handle->b != 0)
-			handle->b->prev = temp->prev;
-		if (handle->a == 0)
-		{
-			handle->a = temp;
-			temp->prev = temp;
-			temp->next = 0;
-		}
-		else
-		{
-			temp->next = handle->a;
-			temp->prev = handle->a->prev;
-			handle->a->prev = temp;
-			handle->a = temp;
-		}
-		handle->len_b--;
-		handle->len_a++;
+		temp->prev = temp;
+		temp->next = 0;
 	}
-	write(1, "pa\n", 3);
+	else
+	{
+		temp->prev = handle->a->prev;
+		handle->a->prev = temp;
+		temp->next = handle->a;
+	}
+	handle->a = temp;
+	handle->len_b--;
+	handle->len_a++;
 }
 
-void	ft_pb(t_handle *handle)
+void	ft_pb(t_handle *handle, int flag)
 {
 	t_stack	*temp;
+	
+	if (flag)
+		write(1, "pb\n", 3);
 	if (handle->a)
 	{
 		temp = handle->a;
@@ -107,7 +110,6 @@ void	ft_pb(t_handle *handle)
 			handle->a->prev = temp->prev;
 		if (handle->b == 0)
 		{
-			handle->b = temp;
 			temp->prev = temp;
 			temp->next = 0;
 		}
@@ -116,10 +118,9 @@ void	ft_pb(t_handle *handle)
 			temp->next = handle->b;
 			temp->prev = handle->b->prev;
 			handle->b->prev = temp;
-			handle->b = temp;
 		}
+		handle->b = temp;
 		handle->len_b++;
 		handle->len_a--;
 	}
-	write(1, "pb\n", 3);
 }

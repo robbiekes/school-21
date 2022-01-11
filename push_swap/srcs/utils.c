@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:59:23 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/06 16:18:40 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:58:23 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	find_start(t_handle *handle)
 	if (start < handle->len_a - start)
 	{
 		while (start-- > 0)
-			ft_ra(handle);
+			ft_ra(handle, 1);
 	}
 	else
 	{
 		while (handle->len_a - start++ > 0)
-			ft_rra(handle);
+			ft_rra(handle, 1);
 	}
 }
 

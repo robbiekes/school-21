@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:41:20 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/06 16:20:17 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/11 20:14:35 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ void	fill_stack_b(t_handle *handle, int *nums, int index)
 		if (handle->a->content >= max_value)
 		{
 			max_value = handle->a->content;
-			ft_ra(handle);
+			ft_ra(handle, 1);
 		}
 		else
-			ft_pb(handle);
+			ft_pb(handle, 1);
 		i--;
 	}
 }
@@ -119,7 +119,7 @@ void	do_operations(t_handle *handle)
 		rrb_and_ra(handle, tmp);
 	else
 		rra_and_rb(handle, tmp);
-	ft_pa(handle);
+	ft_pa(handle, 1);
 }
 
 void	push_swap(t_handle *handle, int *nums)
@@ -129,9 +129,12 @@ void	push_swap(t_handle *handle, int *nums)
 		triple_sort(handle, nums);
 		return ;
 	}
-	fill_stack_b(handle, nums, max_sorted(nums, handle->len_a, 0));
-	while (handle->len_b > 0)
-		do_operations(handle);
+	if (!almost_sorted(handle))
+	{
+		fill_stack_b(handle, nums, max_sorted(nums, handle->len_a, 0));
+		while (handle->len_b > 0)
+			do_operations(handle);
+	}
 	find_start(handle);
-	//print_state(handle);
+	// print_state(handle);
 }
