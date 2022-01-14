@@ -6,13 +6,13 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:41:39 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/11 20:14:40 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:08:30 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_and_exit(void *args, int exit_code, int is_free) // проверить подключен ли хедер для exit
+void	free_and_exit(void *args, int exit_code, int is_free)
 {
 	if (exit_code)
 		write(2, "Error\n", 6);
@@ -41,51 +41,19 @@ int	almost_sorted(t_handle *handle)
 	return (1);
 }
 
-void print_state(t_handle *handle) // dont forget to delete this stuff
+t_handle	*init_stack(int *numbers, int len)
 {
-	int a = handle->len_a;
-	int b = handle->len_b;
-
-	t_stack *tmp_a = handle->a;
-	t_stack *tmp_b = handle->b;
-
-	printf("\n\tSTATE:\n\n");
-	while (a > b)
-	{
-		printf("%4d\n", tmp_a->content);
-		tmp_a = tmp_a->next;
-		a--;
-	}
-	while (a < b)
-	{
-		printf("%12d\n", tmp_b->content);
-		tmp_b = tmp_b->next;
-		b--;
-	}
-	while (a)
-	{
-		printf("%4d  %6d\n", tmp_a->content, tmp_b->content);
-		tmp_a = tmp_a->next;
-		tmp_b = tmp_b->next;
-		a--;
-		b--;
-	}
-	printf("<--A-->_<--B-->\n");
-}
-
-t_handle *init_stack(int *numbers, int len)
-{
-	int	i;
+	int			i;
+	t_handle	*handle;
 
 	i = len - 1;
-	t_handle *handle = (t_handle *) malloc(sizeof(t_handle));
-    handle->a = 0;
-    handle->b = 0;
+	handle = (t_handle *) malloc(sizeof(t_handle));
+	handle->a = 0;
+	handle->b = 0;
 	handle->len_a = len;
 	handle->len_b = 0;
 	handle->max_score = 0;
 	handle->max_value = 0;
-
 	while (i >= 0)
 	{
 		if (push_front(&handle->a, numbers[i]))

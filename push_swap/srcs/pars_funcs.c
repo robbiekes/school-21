@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars_funcs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:41:50 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/06 20:38:29 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:15:25 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,15 @@ int	overflow(char **argv, int len)
 		pos = (argv[i][0] == '+');
 		if (ft_strlen(argv[i]) - neg - pos > 10)
 			return (1);
-		if (neg && ft_strlen(argv[i]) - neg - pos == 10 && ft_strcmp(argv[i], "-2147483648") > 0)
+		if (neg && ft_strlen(argv[i]) - neg - pos == 10
+			&& ft_strcmp(argv[i], "-2147483648") > 0)
 			return (1);
-		if (!neg && ft_strlen(argv[i]) - neg - pos == 10 && ft_strcmp(&argv[i][pos], "2147483647") > 0)
+		if (!neg && ft_strlen(argv[i]) - neg - pos == 10
+			&& ft_strcmp(&argv[i][pos], "2147483647") > 0)
 			return (1);
 		i++;
 	}
-		return (0);
+	return (0);
 }
 
 int	*str_to_num(char **argv, int len, int is_splitted)
@@ -54,16 +56,16 @@ int	*str_to_num(char **argv, int len, int is_splitted)
 	return (final_args);
 }
 
-int is_repetition(int *args, int len)
+int	is_repetition(int *args, int len)
 {
-    int	i;
+	int	i;
 	int	j;
-	
+
 	j = 0;
 	i = 0;
 	while (i < len)
 	{
-        j = i + 1;
+		j = i + 1;
 		while (j < len)
 		{
 			if (args[j] == args[i])
@@ -75,11 +77,11 @@ int is_repetition(int *args, int len)
 	return (0);
 }
 
-int validate_numbers(char **av, int len)
+int	validate_numbers(char **av, int len)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (i < len)
 	{
@@ -96,5 +98,5 @@ int validate_numbers(char **av, int len)
 		}
 		i++;
 	}
-    return (0);
+	return (0);
 }

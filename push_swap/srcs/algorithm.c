@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:41:20 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/11 20:14:35 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:00:56 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,12 @@ int	max_sorted(int *nums, int len, int max_score)
 	return (index);
 }
 
-/* line 33 -> j++; if j == len, then j = 0; */
- 
 void	fill_stack_b(t_handle *handle, int *nums, int index)
 {
 	int	i;
 	int	j;
 	int	max_value;
-	
+
 	i = index + 1;
 	max_value = nums[index];
 	while (i < handle->len_a)
@@ -74,8 +72,8 @@ void	fill_stack_b(t_handle *handle, int *nums, int index)
 
 t_stack	*min_steps_node(t_handle *handle)
 {
-	int	i;
-	int	min_steps;
+	int		i;
+	int		min_steps;
 	t_stack	*node;
 	t_stack	*tmp;
 
@@ -89,10 +87,10 @@ t_stack	*min_steps_node(t_handle *handle)
 		tmp->rb = i;
 		tmp->rrb = handle->len_b - i;
 		if (min4(max(tmp->ra, tmp->rb), tmp->rrb + tmp->ra,
-			tmp->rb + tmp->rra, max(tmp->rra, tmp->rrb)) < min_steps)
+				tmp->rb + tmp->rra, max(tmp->rra, tmp->rrb)) < min_steps)
 		{
 			min_steps = min4(max(tmp->ra, tmp->rb), tmp->rrb + tmp->ra,
-				tmp->rra + tmp->rb, max(tmp->rra, tmp->rrb));
+					tmp->rra + tmp->rb, max(tmp->rra, tmp->rrb));
 			node = tmp;
 		}
 		tmp = tmp->next;
@@ -104,13 +102,13 @@ t_stack	*min_steps_node(t_handle *handle)
 void	do_operations(t_handle *handle)
 {
 	t_stack	*tmp;
-	int	min_steps;
-	int	i;
+	int		min_steps;
+	int		i;
 
 	i = 0;
 	tmp = min_steps_node(handle);
 	min_steps = min4(max(tmp->ra, tmp->rb), tmp->rrb + tmp->ra,
-		tmp->rb + tmp->rra, max(tmp->rra, tmp->rrb));
+			tmp->rb + tmp->rra, max(tmp->rra, tmp->rrb));
 	if (min_steps == max(tmp->ra, tmp->rb))
 		do_rotate(handle, tmp);
 	else if (min_steps == max(tmp->rra, tmp->rrb))
@@ -136,5 +134,4 @@ void	push_swap(t_handle *handle, int *nums)
 			do_operations(handle);
 	}
 	find_start(handle);
-	// print_state(handle);
 }

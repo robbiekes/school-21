@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:59:23 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/11 16:58:23 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:12:43 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	find_start(t_handle *handle)
 
 int	index_a(t_handle *handle, int num)
 {
-	t_stack *tmp;
-	int	index; /*позиция начала отсортированного стэка*/
-	int	i;
+	t_stack	*tmp;
+	int		index;
+	int		i;
 
 	tmp = handle->a;
 	i = 0;

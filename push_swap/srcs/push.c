@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 21:23:04 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/11 17:25:25 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:13:20 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 int	push_front(t_stack **stack_a, int content)
 {
-	t_stack **new;
-	t_stack *tmp;
+	t_stack	**new;
+	t_stack	*tmp;
 
 	new = stack_a;
-
 	if (*new)
 	{
 		tmp = (t_stack *) malloc(sizeof(t_stack));
@@ -42,7 +41,7 @@ int	push_front(t_stack **stack_a, int content)
 	return (0);
 }
 
-void	pop_front(t_handle *handle, char which_stack)											
+void	pop_front(t_handle *handle, char which_stack)
 {
 	t_stack	**donor;
 	t_stack	*tmp;
@@ -51,7 +50,6 @@ void	pop_front(t_handle *handle, char which_stack)
 		donor = &handle->a;
 	else
 		donor = &handle->b;
-
 	if (*donor)
 	{
 		if ((*donor)->next == 0)
@@ -99,7 +97,7 @@ void	ft_pa(t_handle *handle, int flag)
 void	ft_pb(t_handle *handle, int flag)
 {
 	t_stack	*temp;
-	
+
 	if (flag)
 		write(1, "pb\n", 3);
 	if (handle->a)

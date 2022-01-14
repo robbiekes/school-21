@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 21:19:56 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/11 16:25:58 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:12:29 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_sb(t_handle *handle, int flag)
 void	ft_ss(t_handle *handle, int flag)
 {
 	int	tmp;
-	
+
 	if (flag)
 		write(1, "ss\n", 3);
 	if (handle->a && handle->a->next != handle->a)

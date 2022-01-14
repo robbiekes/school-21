@@ -2,14 +2,12 @@ NAME = push_swap
 BONUSNAME = checker
 
 CC = gcc
-# CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
 SRCDIR = ./srcs/
 OBJDIR = ./obj/
 INCDIR = ./includes/
 LIBFTDIR = ./libft/
-# BONUSDIR = ./checker/
 
 SRCS = push_swap.c \
 	parsing.c \

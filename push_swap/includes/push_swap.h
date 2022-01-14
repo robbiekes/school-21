@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 21:18:27 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/11 20:13:30 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:14:48 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 
 typedef struct s_stack
 {
-	int	content;
-	struct s_stack *next;
-	struct s_stack *prev;
-	int				ra;
-	int				rb;
-	int				rra;
-	int				rrb;
+	int					content;
+	struct s_stack		*next;
+	struct s_stack		*prev;
+	int					ra;
+	int					rb;
+	int					rra;
+	int					rrb;
 }					t_stack;
 
 typedef struct s_handle
@@ -71,9 +71,8 @@ void		free_lists(t_handle *handle);
 int			*parsing(int *argc, char **argv);
 int			is_sorted(int *args, int len);
 void		free_argv(char **argv, int len);
-t_handle 	*init_stack(int *numbers, int len);
+t_handle	*init_stack(int *numbers, int len);
 void		free_and_exit(void *args, int exit_code, int is_free);
-void 		print_state(t_handle *handle); 			// delete
 int			validate_numbers(char **av, int len);
 int			is_repetition(int *args, int len);
 int			*str_to_num(char **argv, int len, int is_splitted);

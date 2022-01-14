@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 17:12:11 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/11 17:26:00 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:08:40 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	t_handle *handle;
-	int	*args;
+	t_handle	*handle;
+	int			*args;
 
 	if (argc < 2)
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   regular_func.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 20:54:54 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/05 21:03:11 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:09:12 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,3 @@ int	ft_strcmp(char *s1, char *s2)
 		i++;
 	return (s1[i] - s2[i]);
 }
-
