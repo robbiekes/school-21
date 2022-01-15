@@ -2,6 +2,8 @@
 #define FDF_H
 
 #include <mlx.h>
+#include <math.h>
+#include <stdlib.h>
 
 typedef struct s_data
 {
