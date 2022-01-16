@@ -8,7 +8,15 @@ SRCDIR 			= 	./srcs/
 OBJDIR 			= 	./obj/
 INCDIR 			= 	./includes/
 
-SRCS 			= 	fdf.c
+SRCS 			= 	fdf.c \
+					exit.c \
+					ft_atoi.c \
+					ft_split.c \
+					get_next_line_utils.c \
+					get_next_line.c \
+					ft_ptrlen.c \
+
+
 
 OBJ 			= 	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 16:46:56 by mgwyness          #+#    #+#             */
-/*   Updated: 2021/11/03 16:46:56 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/16 20:16:20 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
