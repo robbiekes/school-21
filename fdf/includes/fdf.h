@@ -8,23 +8,16 @@
 #include <fcntl.h>
 #include <stdio.h>
 
+#define MOUSE_DOWN 	4
+#define MOUSE_UP 	5
+#define HEIGHT 		1000
+#define WIDTH 		1000
+
 typedef struct s_point
 {
 	float	x;
 	float  	y;
 }			t_point;
-
-typedef struct s_map
-{
-	int		height;
-	int		width;
-	int		zoom;
-	int		**z_matrix;
-	int		shift_x;
-	int		shift_y;
-	void	*mlx_ptr;
-	void	*win_ptr;
-} 			t_map;
 
 typedef struct s_data
 {
@@ -34,6 +27,23 @@ typedef struct s_data
 	int		line_len;
 	int		endian;
 }			t_data;
+
+typedef struct s_map
+{
+	int		height;
+	int		width;
+	float	zoom;
+	int		colour;
+	int		**z_matrix;
+	int		shift_x;
+	int		shift_y;
+	void	*mlx_ptr;
+	void	*win_ptr;
+
+	t_data 	*img;
+	
+} 			t_map;
+
 
 ///////utils//////////
 int			ft_atoi(char *str);
