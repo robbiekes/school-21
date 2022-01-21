@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 15:38:12 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/19 20:05:31 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/22 02:17:06 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,49 @@ int	get_width(char *file)
 	return (ft_ptrlen(splitted_str));
 }
 
+void	fill_colours(t_map *map_data, char *str)
+{
+	int	i;
+	int	j;
+	int len;
+	char **substr;
+
+	i = 0;
+	j = 0;
+	len = 0;
+	while (substr[len] != '\0')
+		len++;
+	while (i < map_data->height)
+	{
+		j = 0;
+		substr = ft_split(str, ',');
+		//printf("%s\n", substr[0]);
+		//return ;
+		while (j < map_data->width)
+		{
+			if (len == 2)
+				map_data->colours[i][j] = ft_atoi_base(substr[1], "10");
+			else
+				map_data->colours[i][j] = 0xffffff;
+			j++;
+		}
+		i++;
+	}
+	//i = 0;
+	//while (i < map_data->height)
+	//{
+	//	j = 0;
+	//	{
+	//		while (j < map_data->width)
+	//		{
+	//			printf("%d ", map_data->colours[i][j]);
+	//			j++;
+	//		}
+	//	}
+	//	i++;
+	//}
+}
+
 void	fill_matrix(t_map *map_data, char *file)
 {
 	int		fd;
@@ -127,6 +170,7 @@ void	fill_matrix(t_map *map_data, char *file)
 	{
 		string = get_next_line(fd);
 		splitted_str = ft_split(string, ' ');
+		fill_colours(map_data, splitted_str[i]);
 		j = 0;
 		while (j < map_data->width)
 		{
@@ -137,13 +181,13 @@ void	fill_matrix(t_map *map_data, char *file)
 		free(string);
 		i++;
 	}
-	i = 0;
+	//i = 0;
 	// while (i < map_data->height)
 	// {
 	// 	j = 0;
 	// 	while (j < map_data->width)
 	// 	{
-	// 		printf("%3d", map_data->z_matrix[i][j]);
+	// 		printf("%3d", map_data->colours[i][j]);
 	// 		j++;
 	// 	}
 	// 	printf("\n");
@@ -160,18 +204,21 @@ void	read_map(char *map, t_map *map_data)
 	if (!get_height(map) || !get_width(map))
 	{
 		free(map_data);
-		exit (0);
+		exit(0);
 	}
 	map_data->height = get_height(map);
 	map_data->width = get_width(map);
-
-	if (!(map_data->z_matrix = (int **)malloc(sizeof(int *) * map_data->height)))
-		exit (0);
+	map_data->z_matrix = (int **)malloc(sizeof(int *) * map_data->height);
+	map_data->colours = (int **)malloc(sizeof(int *) * map_data->height);
+	if (!(map_data->z_matrix))
+		exit(0);
 	while (i < map_data->height)
-		map_data->z_matrix[i++] = (int *)malloc(sizeof(int) * map_data->width); // check malloc
-
+	{
+		map_data->z_matrix[i] = (int *)malloc(sizeof(int) * map_data->width); // check malloc
+		map_data->colours[i] = (int *)malloc(sizeof(int) * map_data->width);
+		i++;
+	}
 	fill_matrix(map_data, map);
-	// printf("height = %d width = %d\n", map_data->height, map_data->width);
 }
 
 void	shift_dot(t_point *p, t_map *map_data)
@@ -200,10 +247,10 @@ void	view_above(t_map *map_data, t_data *data)
 			{
 				p1.x = (x + 1) * map_data->zoom;
 				p1.y = y * map_data->zoom;
-				// if (map_data->z_matrix[y][x] > 0)	
-				// 	map_data->colour = 0x00FF0000;
-				// else
-				// 	map_data->colour = 0xffffff;
+				if (map_data->z_matrix[y][x] > 0 && map_data->z_matrix[y][x + 1] != 0)	
+				 	map_data->colour = 0x00FF0000;
+				else
+					map_data->colour = 0xffffff;
 				shift_dot(&p, map_data);
 				shift_dot(&p1, map_data);
 				draw_line(&p, &p1, data, map_data->colour);
@@ -214,7 +261,10 @@ void	view_above(t_map *map_data, t_data *data)
 				p.y = y * map_data->zoom;
 				p1.x = x * map_data->zoom;
 				p1.y = (y + 1) * map_data->zoom;
-				map_data->colour = 0x00FF0000;
+				if (map_data->z_matrix[y][x] > 0 && map_data->z_matrix[y + 1][x] != 0)	
+				 	map_data->colour = 0x00FF0000;
+				else
+					map_data->colour = 0xffffff;
 				shift_dot(&p, map_data);
 				shift_dot(&p1, map_data);
 				draw_line(&p, &p1, data, map_data->colour);
@@ -245,10 +295,10 @@ void	isometric_map(t_map *map_data, t_data *data)
 			{
 				p1.x = (x + 1) * map_data->zoom;
 				p1.y = y * map_data->zoom;
-				// if (map_data->z_matrix[y][x] > 0)	
-				// 	map_data->colour = 0x00FF0000;
-				// else
-				// 	map_data->colour = 0xffffff;
+				if (map_data->z_matrix[y][x] > 0 && map_data->z_matrix[y][x + 1] != 0)	
+				 	map_data->colour = 0x00FF0000;
+				else
+					map_data->colour = 0xffffff;
 				isometry(&p, (map_data->z_matrix[y][x] * map_data->zoom / 2));
 				isometry(&p1, (map_data->z_matrix[y][x + 1] * map_data->zoom / 2));
 				shift_dot(&p, map_data);
@@ -261,7 +311,10 @@ void	isometric_map(t_map *map_data, t_data *data)
 				p.y = y * map_data->zoom;
 				p1.x = x * map_data->zoom;
 				p1.y = (y + 1) * map_data->zoom;
-				map_data->colour = 0x0000FF00;
+				if (map_data->z_matrix[y][x] > 0 && map_data->z_matrix[y + 1][x] != 0)	
+				 	map_data->colour = 0x00FF0000;
+				else
+					map_data->colour = 0xffffff;
 				isometry(&p, (map_data->z_matrix[y][x] * map_data->zoom / 2));
 				isometry(&p1, (map_data->z_matrix[y + 1][x] * map_data->zoom / 2));
 				shift_dot(&p, map_data);
@@ -282,7 +335,8 @@ void	background(t_map *map_data)
 	y = 0;
 	x = 0;
 	while (y < HEIGHT)
-	{
+	{	
+		x = 0;
 		while (x < WIDTH)
 		{
 			my_mlx_pixel_put(map_data->img, x, y, 0x00000000);
@@ -292,24 +346,30 @@ void	background(t_map *map_data)
 	}
 }
 
-void	update_img(t_map *map_data)
+void	update_img(t_map *map_data, int key)
 {
+	static int view_mode = 0;
+
 	background(map_data);
-	view_above(map_data, map_data->img);
+	if (key == 19)
+		view_mode = 1;
+	if (key == 20)
+		view_mode = 0;
+	if (view_mode)
+		view_above(map_data, map_data->img);
+	else
+		isometric_map(map_data, map_data->img);
 	mlx_put_image_to_window(map_data->mlx_ptr, map_data->win_ptr, map_data->img->image, 0, 0);
-
-
-	// mlx_destroy_image(map_data->mlx_ptr, map_data->img->image);
-	// map_data->img->image = mlx_new_image(map_data->mlx_ptr, HEIGHT, WIDTH);
-	// map_data->img->address = mlx_get_data_addr(map_data->img->image, &map_data->img->bits_per_pixel,
-	// 				&map_data->img->line_len, &map_data->img->endian);
-	// // isometric_map(map_data, map_data->img);
-	// mlx_clear_window(map_data->mlx_ptr, map_data->win_ptr);
-	// mlx_put_image_to_window(map_data->mlx_ptr, map_data->win_ptr, map_data->img->image, 0, 0);
 }
+
+
+
 int	key_num(int	key, t_map *map_data)
 {
-	 printf("%d\n", key);
+	static int	above;
+
+	above = 0;
+	printf("%d\n", key);
 	if (key == 124)
 		map_data->shift_x += 5;
 	else if (key == 123)
@@ -330,10 +390,9 @@ int	key_num(int	key, t_map *map_data)
 		isometric_map(map_data, map_data->img);
 	else
 		return (0);
-	update_img(map_data);
+	update_img(map_data, key);
+	return (0);
 }
-
-
 
 int	mouse_zoom(int key, int x, int y, t_map *map_data)
 {
@@ -345,16 +404,11 @@ int	mouse_zoom(int key, int x, int y, t_map *map_data)
 		map_data->zoom += zoom / 16;
 	else if (key == MOUSE_DOWN && zoom > 1.1)
 		map_data->zoom -= zoom / 16;
-	mlx_destroy_image(map_data->mlx_ptr, map_data->img->image);
-	map_data->img->image = mlx_new_image(map_data->mlx_ptr, HEIGHT, WIDTH);
-	map_data->img->address = mlx_get_data_addr(map_data->img->image, &map_data->img->bits_per_pixel,
-					&map_data->img->line_len, &map_data->img->endian);
-	// if (key == 19)
-	// 	view_above(map_data, map_data->img);
-	// else if (key == 20)
+	else if (key == 19)
+		view_above(map_data, map_data->img);
+	else
 		isometric_map(map_data, map_data->img);
-	mlx_clear_window(map_data->mlx_ptr, map_data->win_ptr);
-	mlx_put_image_to_window(map_data->mlx_ptr, map_data->win_ptr, map_data->img->image, 0, 0);
+	update_img(map_data, key);
 	return (x + y);
 }
 
@@ -372,11 +426,10 @@ int main(int argc, char **argv)
 					&img.line_len, &img.endian);
 	map_data->zoom = 20;
 	map_data->img = &img;
-	map_data->colour = 0x0000FF00;
+	map_data->colour = 0xffffff;
 	map_data->shift_x = 300;
 	map_data->shift_y = 200;
-	// isometric_map(map_data, map_data->img);
-	view_above(map_data, map_data->img);
+	isometric_map(map_data, map_data->img);
 	mlx_hook(map_data->win_ptr, 4, 0, mouse_zoom, map_data);
 	mlx_key_hook(map_data->win_ptr, key_num, map_data);
 	mlx_put_image_to_window(map_data->mlx_ptr, map_data->win_ptr, img.image, 0, 0);

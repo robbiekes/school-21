@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 19:13:27 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/16 19:23:42 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/21 18:12:32 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fdf.h"
 
 void	finish(int exitcode)
 {

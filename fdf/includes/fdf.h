@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #define MOUSE_DOWN 	4
 #define MOUSE_UP 	5
@@ -28,25 +29,27 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
-typedef struct s_map
+typedef struct 	s_map
 {
-	int		height;
-	int		width;
-	float	zoom;
-	int		colour;
-	int		**z_matrix;
-	int		shift_x;
-	int		shift_y;
-	void	*mlx_ptr;
-	void	*win_ptr;
+	int			height;
+	int			width;
+	float		zoom;
+	int			colour;
+	int			**z_matrix;
+	int			**colours;
+	int			shift_x;
+	int			shift_y;
+	void		*mlx_ptr;
+	void		*win_ptr;
 
-	t_data 	*img;
+	t_data 		*img;
 	
-} 			t_map;
+} 				t_map;
 
 
 ///////utils//////////
 int			ft_atoi(char *str);
+int			ft_atoi_base(char *str, char *base);
 char		**ft_split(char *s, char c);
 int			ft_ptrlen(char **s);
 
