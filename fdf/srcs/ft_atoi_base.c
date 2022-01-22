@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/22 01:46:36 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/22 01:51:04 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/22 17:15:06 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int	ft_atoi_base(char *str, char *base)
 		return (0);
 	s = 0;
 	while (str[s] != '\0' && (str[s] == ' ' || str[s] == '\t' || str[s] == '\r'
-			|| str[s] == '\n' || str[s] == '\v' || str[s] == '\f'))
+			|| str[s] == '\n' || str[s] == '\v' || str[s] == '\f' || str[s] == '0'
+			|| str[s] == 'x'))
 		s++;
 	i = s - 1;
 	res = 0;

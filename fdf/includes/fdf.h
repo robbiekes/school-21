@@ -46,6 +46,7 @@ typedef struct 	s_map
 	
 } 				t_map;
 
+/////////// в мейке нет зависимости от хедера /////////////
 
 ///////utils//////////
 int			ft_atoi(char *str);
@@ -60,7 +61,5 @@ int			get_height(char *file);
 int			get_width(char *file);
 void		free_splitted_exit(char **arr, int flag);
 char		*get_next_line(int fd);
-
-
 
 #endif
