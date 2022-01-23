@@ -46,8 +46,6 @@ typedef struct 	s_map
 	
 } 				t_map;
 
-/////////// в мейке нет зависимости от хедера /////////////
-
 ///////utils//////////
 int			ft_atoi(char *str);
 int			ft_atoi_base(char *str, char *base);

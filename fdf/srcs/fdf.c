@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 15:38:12 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/22 20:39:16 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/23 15:42:33 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int colour)
 
 	dst = data->address + (y * data->line_len + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = colour;
+}
+
+void	free_arrays(t_map *map_data, int **arr)
+{
+	int	i;
+
+	i = 0;
+	while (i < map_data->height)
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
 
 void	isometry(t_point *p, int z)
@@ -46,7 +59,6 @@ void	draw_line(t_point *p, t_point *p1, t_data *data, int colour)
 		p->x += x_step;
 		p->y += y_step;
 	}
-
 }
 ////////////count height of the map/////////////////
 int	get_height(char *file)
@@ -63,13 +75,13 @@ int	get_height(char *file)
 	line = get_next_line(fd);
 	while (line)
 	{
+		free(line);
+		line = 0;
 		strings++;
-		tmp = line;
 		line = get_next_line(fd);
-		free(tmp);
 	}
-	free(line);
 	close(fd);
+	free(line);
 	return (strings);
 }
 ////////free splitted string and terminate the whole program/////////
@@ -79,7 +91,11 @@ void	free_splitted_exit(char **arr, int flag)
 
 	i = 0;
 	while (arr[i])
-			free(arr[i++]);
+	{
+			free(arr[i]);
+			i++;
+	}
+	free(arr[i]);
 	free(arr);
 	if (flag)
 		finish(0);
@@ -110,7 +126,7 @@ int	get_width(char *file)
 			free(string);
 	}
 	close(fd);
-	return (ft_ptrlen(splitted_str) - 1);
+	return (ft_ptrlen(splitted_str));
 }
 
 void	fill_colours(t_map *map_data, char **str, int i)
@@ -127,8 +143,8 @@ void	fill_colours(t_map *map_data, char **str, int i)
 		else
 			map_data->colours[i][j] = 0xff0000;
 		j++;
+		free_splitted_exit(substr, 0);
 	}
-	free_splitted_exit(substr, 0);
 }
 
 void	fill_matrix(t_map *map_data, char *file)
@@ -172,7 +188,7 @@ void	read_map(char *map, t_map *map_data)
 		exit(0);
 	}
 	map_data->height = get_height(map);
-	map_data->width = get_width(map);
+	 map_data->width = get_width(map);
 	map_data->z_matrix = (int **)malloc(sizeof(int *) * map_data->height);
 	map_data->colours = (int **)malloc(sizeof(int *) * map_data->height);
 	if (!(map_data->z_matrix))
@@ -330,7 +346,14 @@ int	key_num(int	key, t_map *map_data)
 	else if (key == 125)
 		map_data->shift_y += 5;
 	else if (key == 53)
+	{
+		mlx_destroy_image(map_data->mlx_ptr, map_data->win_ptr);
+		mlx_clear_window(map_data->mlx_ptr, map_data->win_ptr);
+		free_arrays(map_data, map_data->z_matrix);
+		free_arrays(map_data, map_data->colours);
+		free(map_data);
 		exit (0);
+	}
 	else if (key == 13)
 		map_data->zoom += map_data->zoom / 25;
 	else if (key == 1)
@@ -385,4 +408,7 @@ int main(int argc, char **argv)
 	mlx_key_hook(map_data->win_ptr, key_num, map_data);
 	mlx_put_image_to_window(map_data->mlx_ptr, map_data->win_ptr, img.image, 0, 0);
 	mlx_loop(map_data->mlx_ptr);
+		free_arrays(map_data, map_data->z_matrix);
+		free_arrays(map_data, map_data->colours);
+		free(map_data);
 } 

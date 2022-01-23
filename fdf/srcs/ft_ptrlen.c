@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ptrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 18:36:40 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/21 18:12:58 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/23 15:18:30 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,12 @@ int	ft_ptrlen(char **s)
 	int	i;
 
 	i = 0;
-	while (s[i] != 0)
-		free(s[i++]);
+	while (s[i] != NULL)
+	{
+		free(s[i]);
+		i++;
+	}
+	free(s[i]);
 	free(s);
 	return (i);
 }

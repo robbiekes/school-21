@@ -25,10 +25,10 @@ BONUSOBJ 		= 	$(addprefix $(OBJDIR), $(BONUSSRCS:.c=.o))
 
 all				: 	$(NAME)
 
-$(OBJDIR)%.o 	: 	$(SRCDIR)%.c
+$(OBJDIR)%.o 	: 	$(SRCDIR)%.c $(INCDIR)/fdf.h $(INCDIR)/get_next_line.h
 					$(CC) $(CFLAGS) -Imlx -c $< -o $@ -I$(INCDIR) 
 
-$(NAME)			: 	$(OBJDIR) $(OBJ)
+$(NAME)			: 	$(OBJDIR) $(OBJ) $(INCDIR) 
 					$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 clean			:
