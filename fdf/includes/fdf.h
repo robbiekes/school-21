@@ -43,16 +43,14 @@ typedef struct 	s_map
 	void		*win_ptr;
 
 	t_data 		*img;
-	
+
 } 				t_map;
 
-///////utils//////////
 int			ft_atoi(char *str);
 int			ft_atoi_base(char *str, char *base);
 char		**ft_split(char *s, char c);
 int			ft_ptrlen(char **s);
 
-////////in use////////
 void		finish(int exitcode);
 void		read_map(char *map, t_map *map_data);
 int			get_height(char *file);
