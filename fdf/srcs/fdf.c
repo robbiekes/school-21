@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 15:38:12 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/24 20:21:46 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:44:31 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,262 +19,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int colour)
 
 	dst = data->address + (y * data->line_len + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = colour;
-}
-
-void	isom(t_point *p, int z)
-{
-	p->x = (p->x - p->y) * cos(0.8);
-	p->y = (p->x + p->y) * sin(0.8) - z;
-}
-
-void	draw_line(t_point *p, t_point *p1, t_data *data, int colour)
-{
-	float	x_step;
-	float	y_step;
-	int		max;
-
-	x_step = p1->x - p->x;
-	y_step = p1->y - p->y;
-	max = MAX(ABS(x_step), ABS(y_step));
-	x_step /= max;
-	y_step /= max;
-	while ((int)(p->x - p1->x) || (int)(p->y - p1->y))
-	{
-		if (p->x >= 0 && p->x < HEIGHT && p->y >= 0 && p->y < WIDTH)
-			my_mlx_pixel_put(data, (int)p->x, (int)p->y, colour);
-		p->x += x_step;
-		p->y += y_step;
-	}
-}
-
-int	get_height(char *file)
-{
-	int		strings;
-	char	*line;
-	int		fd;
-
-	strings = 0;
-	fd = open(file, O_RDONLY, 0);
-	if (fd == -1)
-		return (0);
-	line = get_next_line(fd);
-	while (line)
-	{
-		free(line);
-		line = 0;
-		strings++;
-		line = get_next_line(fd);
-	}
-	close(fd);
-	free(line);
-	return (strings);
-}
-
-int	get_width(char *file)
-{
-	int		fd;
-	char	*string;
-	char	**splitted_str;
-
-	fd = open(file, O_RDONLY, 0);
-	if (fd == -1)
-		return (0);
-	string = get_next_line(fd);
-	if (string)
-	{
-		splitted_str = ft_split(string, ' ');
-		if (!splitted_str)
-			finish(0);
-		free(string);
-	}
-	while (string)
-	{
-		string = get_next_line(fd);
-		if (string)
-			free(string);
-	}
-	close(fd);
-	return (ft_ptrlen(splitted_str));
-}
-
-void	fill_colours(t_map *map_data, char **str, int i)
-{
-	int		j;
-	char	**substr;
-
-	j = 0;
-	while (j < map_data->width)
-	{
-		substr = ft_split(str[j], ',');
-		if (substr[1] != 0)
-			map_data->colours[i][j] = ft_atoi_base(&(substr[1][2]),
-					"0123456789ABCDEF");
-		else
-			map_data->colours[i][j] = 0xff0000;
-		j++;
-		free_splitted_exit(substr, 0);
-	}
-}
-
-void	fill_matrix(t_map *map_data, char *file)
-{
-	int		fd;
-	int		i;
-	int		j;
-	char	*string;
-	char	**splitted_str;
-
-	fd = open(file, O_RDONLY, 0);
-	i = 0;
-	j = 0;
-	while (i < map_data->height)
-	{
-		string = get_next_line(fd);
-		splitted_str = ft_split(string, ' ');
-		fill_colours(map_data, splitted_str, i);
-		j = 0;
-		while (j < map_data->width)
-		{
-			map_data->z_matrix[i][j] = ft_atoi(splitted_str[j]);
-			j++;
-		}
-		free_splitted_exit(splitted_str, 0);
-		free(string);
-		i++;
-	}
-	close(fd);
-}
-
-void	read_map(char *map, t_map *map_data)
-{
-	int	i;
-
-	i = 0;
-	if (!get_height(map) || !get_width(map))
-	{
-		free(map_data);
-		exit(0);
-	}
-	map_data->height = get_height(map);
-	map_data->width = get_width(map);
-	map_data->z_matrix = (int **)malloc(sizeof(int *) * map_data->height);
-	map_data->colours = (int **)malloc(sizeof(int *) * map_data->height);
-	if (!(map_data->z_matrix))
-		exit(0);
-	while (i < map_data->height)
-	{
-		map_data->z_matrix[i] = (int *)malloc(sizeof(int) * map_data->width);
-		map_data->colours[i] = (int *)malloc(sizeof(int) * map_data->width);
-		i++;
-	}
-	fill_matrix(map_data, map);
-}
-
-void	shift_dot(t_point *p, t_map *map_data)
-{
-	p->x += map_data->shift_x;
-	p->y += map_data->shift_y;
-}
-
-void	draw_map(t_map *map_data, t_point *p, t_point *p1)
-{
-	shift_dot(&(*p), map_data);
-	shift_dot(&(*p1), map_data);
-	draw_line(&(*p), &(*p1), map_data->img, map_data->colour);
-}
-
-void	change_y1(t_map *map_data, int x, int y, t_point *p1)
-{
-	p1->x = x * map_data->zoom;
-	p1->y = (y + 1) * map_data->zoom;
-}
-
-void	change_x1(t_map *map_data, int x, int y, t_point *p1)
-{
-	p1->x = (x + 1) * map_data->zoom;
-	p1->y = y * map_data->zoom;
-}
-
-void	change_x_y(t_map *map_data, int x, int y, t_point *p)
-{
-	p->x = x * map_data->zoom;
-	p->y = y * map_data->zoom;
-}
-
-void	view_above(t_map *map_data, t_data *data, int x, int y)
-{
-	t_point	p;
-	t_point	p1;
-	
-	while (++y < map_data->height)
-	{
-		x = -1;
-		while (++x < map_data->width)
-		{
-			change_x_y(map_data, x, y, &p);
-			if (x < map_data->width - 1)
-			{
-				change_x1(map_data, x, y, &p1);
-				map_data->colour = map_data->colours[y][x];
-				draw_map(map_data, &p, &p1);
-			}
-			if (y < map_data->height - 1)
-			{
-				change_x_y(map_data, x, y, &p);
-				change_y1(map_data, x, y, &p1);
-				map_data->colour = map_data->colours[y][x];
-				draw_map(map_data, &p, &p1);
-			}
-		}
-	}
-}
-
-void	isometric_map(t_map *map, t_data *data, int i) // i = -1
-{
-	t_point	p;
-	t_point	p1;
-	int		w;
-
-	w = map->width;
-	while (++i < map->height * w)
-	{
-		change_x_y(map, i % w, i / w, &p);
-		map->colour = map->colours[i / w][i % w];
-		if (i % w < w - 1)
-		{
-			change_x1(map, i % w, i / w, &p1);
-			isom(&p, (map->z_matrix[i / w][i % w] * map->zoom / 2));
-			isom(&p1, (map->z_matrix[i / w][i % w + 1] * map->zoom / 2));
-			draw_map(map, &p, &p1);
-		}
-		if (i / w < map->height - 1)
-		{
-			change_x_y(map, i % w, i / w, &p);
-			change_y1(map, i % w, i / w, &p1);
-			isom(&p, (map->z_matrix[i / w][i % w] * map->zoom / 2));
-			isom(&p1, (map->z_matrix[i / w + 1][i % w] * map->zoom / 2));
-			draw_map(map, &p, &p1);
-		}
-	}
-}
-
-void	background(t_map *map_data)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	x = 0;
-	while (y < HEIGHT)
-	{	
-		x = 0;
-		while (x < WIDTH)
-		{
-			my_mlx_pixel_put(map_data->img, x, y, 0x00000000);
-			x++;
-		}
-		y++;
-	}
 }
 
 void	update_img(t_map *map_data, int key)
@@ -324,7 +68,6 @@ int	mouse_zoom(int key, int x, int y, t_map *map_data)
 {
 	float	zoom;
 
-	printf("%d\n", key);
 	zoom = map_data->zoom;
 	if (key == MOUSE_UP && zoom < 100)
 		map_data->zoom += zoom / 16;
@@ -338,13 +81,11 @@ int	mouse_zoom(int key, int x, int y, t_map *map_data)
 	return (x + y);
 }
 
-int	main(int argc, char **argv)
+void	fdf(char **argv)
 {
 	t_data	img;
 	t_map	*map_data;
 
-	if (argc > 2)
-		exit(0);
 	map_data = (t_map *)malloc(sizeof(t_map));
 	read_map(argv[1], map_data);
 	map_data->mlx_ptr = mlx_init();

@@ -9,15 +9,15 @@ OBJDIR 			= 	./obj/
 INCDIR 			= 	./includes/
 
 SRCS 			= 	fdf.c \
-					exit.c \
-					ft_atoi.c \
+					main.c \
+					utils.c \
+					utils2.c \
 					ft_split.c \
+					draw_func.c \
+					draw_func2.c \
 					ft_atoi_base.c \
-					get_next_line_utils.c \
 					get_next_line.c \
-					ft_ptrlen.c \
-
-
+					get_next_line_utils.c \
 
 OBJ 			= 	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
 

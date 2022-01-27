@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 20:19:35 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/24 20:21:17 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/01/25 15:42:12 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,3 @@ int	ft_atoi(char *str)
 		num = (num * 10) + (str[i++] - '0');
 	return (num * sign);
 }
-

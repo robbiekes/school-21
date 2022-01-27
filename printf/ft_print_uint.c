@@ -1,43 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putunbr.c                                       :+:      :+:    :+:   */
+/*   ft_print_uint.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/17 18:39:57 by mgwyness          #+#    #+#             */
-/*   Updated: 2021/10/21 13:43:19 by mgwyness         ###   ########.fr       */
+/*   Created: 2021/10/17 18:42:44 by mgwyness          #+#    #+#             */
+/*   Updated: 2021/10/19 18:27:02 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_numlen(unsigned int n)
+int	ft_print_uint(va_list ap)
 {
-	int	size;
-
-	if (n == 0)
-		return (1);
-	size = 0;
-	while (n)
-	{
-		n /= 10;
-		size++;
-	}
-	return (size);
-}
-
-int	ft_putunbr(unsigned int n)
-{
-	unsigned int	nbr;
+	unsigned int	tmp;
 	int				count;
-	int				temp;
 
-	nbr = (unsigned int) n;
-	count = 0;
-	if (nbr >= 10)
-		ft_putunbr(nbr / 10);
-	temp = (nbr % 10) + '0';
-	write(1, &temp, 1);
-	return (ft_numlen(n));
+	tmp = va_arg(ap, unsigned int);
+	count = ft_putunbr(tmp);
+	return (count);
 }

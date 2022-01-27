@@ -1,43 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putunbr.c                                       :+:      :+:    :+:   */
+/*   ft_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/17 18:39:57 by mgwyness          #+#    #+#             */
-/*   Updated: 2021/10/21 13:43:19 by mgwyness         ###   ########.fr       */
+/*   Created: 2021/10/17 18:42:54 by mgwyness          #+#    #+#             */
+/*   Updated: 2021/10/20 16:10:47 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "libft/libft.h"
 
-static int	ft_numlen(unsigned int n)
+int	ft_print_str(va_list ap)
 {
-	int	size;
+	char	*tmp;
+	int		i;
 
-	if (n == 0)
-		return (1);
-	size = 0;
-	while (n)
+	i = 0;
+	tmp = va_arg(ap, char *);
+	if (tmp == 0)
 	{
-		n /= 10;
-		size++;
+		write (1, "(null)", 6);
+		return (6);
 	}
-	return (size);
-}
-
-int	ft_putunbr(unsigned int n)
-{
-	unsigned int	nbr;
-	int				count;
-	int				temp;
-
-	nbr = (unsigned int) n;
-	count = 0;
-	if (nbr >= 10)
-		ft_putunbr(nbr / 10);
-	temp = (nbr % 10) + '0';
-	write(1, &temp, 1);
-	return (ft_numlen(n));
+	while (tmp[i] != '\0')
+	{
+		write(1, &tmp[i], 1);
+		i++;
+	}
+	return (ft_strlen(tmp));
 }
