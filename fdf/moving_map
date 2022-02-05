@@ -1,0 +1,37 @@
+REPLACE ORIG FUNCTION WITH IT
+
+
+
+
+
+void	isometric_map(t_map *map_data, t_data *data, int x, int y)
+{
+	t_point	p;
+	t_point	p1;
+
+	while (++y < map_data->height)
+	{
+		x = 0;
+		while (++x < map_data->width)
+		{
+			change_x_y(map_data, x, y, &p);
+			if (x < map_data->width - 1)
+			{
+				change_x1(map_data, x, y, &p1);
+				map_data->colour = map_data->colours[y][x];
+				isom(&p, (map_data->z_matrix[y][x] * map_data->zoom / 2));
+				isom(&p1, (map_data->z_matrix[y][x + 1] * map_data->zoom / 2));
+				draw_map(map_data, &p, &p1);
+			}
+			if (y < map_data->height - 1)
+			{
+				// change_x_y(map_data, x, y, &p);
+				change_y1(map_data, x, y, &p1);
+				map_data->colour = map_data->colours[y][x];
+				isom(&p, (map_data->z_matrix[y][x] * map_data->zoom / 2));
+				isom(&p1, (map_data->z_matrix[y + 1][x] * map_data->zoom / 2));
+				draw_map(map_data, &p, &p1);
+			}
+		}
+	}
+}
