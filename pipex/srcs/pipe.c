@@ -3,14 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:55:28 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/02/06 12:12:30 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/06 19:44:47 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+char	*find_path(char *cmd, char **env)
+{
+	char *path;
+	int	index;
+	char **all_paths;
+	int i;
+	int j;
+	i = 0;
+	j = 0;
+	while (env[i])
+	{
+		if (env[i][0] == 'P' && env[i][1] == 'A'
+		&& env[i][2] == 'T' && env[i][3] == 'H')
+			break ;
+		i++;
+	}
+	// здесь i указывает на PATH либо на пустую строку, если у нас в env нет PATH
+	all_paths = ft_split(env[i], ':');
+	printf("path=%s\n", env[i]);
+	while (all_paths[j] != 0)
+	{
+		path = pathjoin(all_paths[j], "bash"); // TODO: добавить в хедер
+		// path = ft_strjoin("/", "bash");
+		// path = ft_strjoin(all_paths[j], path);
+		if (!access(path, 1))
+		{
+			printf("here [%d]\n", j);
+			break ;
+		}
+		printf("%s\n", path);
+		free(path);
+		path = 0;
+		i++;
+	}
+	return (path);
+}
 
 void	child1_exec(int fd1, char *cmd1, int *end, char **env)
 {
@@ -28,13 +65,11 @@ void	child1_exec(int fd1, char *cmd1, int *end, char **env)
 	close(fd1);
 
 	char **argv;
-	argv = ft_split(cmd1, ' '); // "ls -l" -> ["ls", "-l", NULL]
-
-	char *path = "/bin/ls"; // to parse PATH from env
-	//find_path(); // TODO: find PATH part with our cmd
-	// strcat(path, argv[0]);
-
-	execve(path, ++argv, env);
+	argv = (char **)malloc(sizeof(char *) * 4);
+	// argv = ["pipex", "-c", cmd, NULL]
+	// char *path = find_path(cmd1, env);
+	const char	*path = "/bin/bash";
+	execve(path, argv, env);
 	
 	exit(1);
 }
@@ -58,14 +93,16 @@ void	child2_exec(int fd2, char *cmd2, int *end, char **env)
 	close(end[1]); // always close the end of the pipe you don't use
 	close(fd2);
 
-	char **argv;
-	argv = ft_split(cmd2, ' '); // "ls -l" -> ["ls", "-l", NULL]
+	char **args;
+	args = ft_split(cmd2, ' '); // "ls -l" -> ["ls", "-l", NULL]
 
+	find_path(&cmd2, env);
+	
 	char *path = "/bin/cat"; // to parse PATH from env
 	//find_path(); // TODO: find PATH part with our cmd
 	// strcat(path, argv[0]);
 
-	execve(path, ++argv, env);
+	// execve(path, ++args, env);
 	
 	exit(1);
 }
@@ -102,17 +139,6 @@ int main(int ac, char **av, char **env)
 	fd2 = open(av[4], O_WRONLY | O_CREAT | O_TRUNC | 0644);
 	//if (fd1 < 0 || fd2 < 0)
 	//	return (-1);
-	
-	//char **path;
-	//int i = 0;
-	//printf("%s\n", env[4]);
-	//path = ft_split(env[4], ':');
-	//while (path[i] != '\0')
-	//{
-	//	printf("[%d] %s\n", i, path[i]);
-	//	i++;
-	//}
-	
 	pipex(fd1, fd2, av[2], av[3], env);
 	//os.system("ls -l");
 	//execve("ls", ["-l"], ["...", "PATH=/bin/", "..."]);
