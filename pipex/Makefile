@@ -7,7 +7,7 @@ SRCDIR 			= 	./srcs/
 OBJDIR 			= 	./obj/
 INCDIR 			= 	./includes/
 
-SRCS 			= pipe.c ft_split.c
+SRCS 			= pipe.c ft_split.c	ft_substr.c
 
 OBJ 			= 	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
 

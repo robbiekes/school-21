@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 18:11:08 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/02/05 01:05:13 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/06 11:35:03 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@
 #include <stdio.h>
 
 char	**ft_split(char *s, char c);
+char	*ft_substr(char **s, unsigned int start, int len);
 
 #endif

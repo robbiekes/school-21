@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:55:28 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/02/05 21:54:16 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/06 12:12:30 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	pipex(int fd1, int fd2, char *cmd1, char *cmd2, char **env)
 	close(fd2);
 	waitpid(child1, &status, 0);
 	waitpid(child2, &status, 0);
-	
 }
 
 int main(int ac, char **av, char **env)
@@ -101,8 +100,19 @@ int main(int ac, char **av, char **env)
 	int	fd2;
 	fd1 = open(av[1], O_RDONLY);
 	fd2 = open(av[4], O_WRONLY | O_CREAT | O_TRUNC | 0644);
-	if (fd1 < 0 || fd2 < 0)
-		return (-1);
+	//if (fd1 < 0 || fd2 < 0)
+	//	return (-1);
+	
+	//char **path;
+	//int i = 0;
+	//printf("%s\n", env[4]);
+	//path = ft_split(env[4], ':');
+	//while (path[i] != '\0')
+	//{
+	//	printf("[%d] %s\n", i, path[i]);
+	//	i++;
+	//}
+	
 	pipex(fd1, fd2, av[2], av[3], env);
 	//os.system("ls -l");
 	//execve("ls", ["-l"], ["...", "PATH=/bin/", "..."]);
