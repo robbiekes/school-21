@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 18:11:08 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/02/06 19:35:28 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/07 17:54:11 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strcat(char *dst, char *src);
 int		ft_strlen(char *s);
 char	*pathjoin(char *s1, char *s2);
-
+void	ft_strcpy(char *dst, char *src);
+char	*ft_strdup(char *s1);
 
 #endif
