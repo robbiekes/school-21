@@ -1,13 +1,16 @@
 NAME 			= 	pipex
+BONUSNAME		= 	pipex_bonus
 
 CC 				= 	gcc
+CFLAGS			= 	-Wall -Wextra -Werror
 RM 				= 	rm -rf
 
 SRCDIR 			= 	./srcs/
 OBJDIR 			= 	./obj/
 INCDIR 			= 	./includes/
 
-SRCS 			= pipe.c ft_split.c	ft_substr.c ft_strjoin.c
+SRCS 			= 	pipex.c ft_split.c	utils.c
+BONUSSRCS		= 	pipex_bonus.c
 
 OBJ 			= 	$(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
