@@ -6,17 +6,32 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:55:28 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/02/08 20:16:09 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/09 18:57:55 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+// void	free_struct(char **args)
+// {
+// 	int	i;
+	
+// 	i = 0;
+// 	while (i < 4)
+// 	{
+// 		free(args[i]);
+// 		i++;
+// 	}
+// 	free(args);
+// }
 
 char	**set_args(char *cmd)
 {
 	char	**argv;
 
 	argv = (char **)malloc(sizeof(char *) * 4);
+	if (argv == 0)
+		exit(1);
 	argv[0] = ft_strdup("pipex");
 	argv[1] = ft_strdup("-c");
 	argv[2] = cmd;
@@ -35,6 +50,7 @@ void	input_exec(int fd1, char *cmd1, int *tube, char **env)
 		perror("dup2");
 		exit(1);
 	}
+	// free_struct(args);
 	close(tube[0]);
 	close(fd1);
 	execve(path, args, env);
@@ -61,26 +77,25 @@ void	output_exec(int fd2, char *cmd2, int *tube, char **env)
 void	pipex(int fd1, int fd2, char **args, char **env)
 {
 	int		tube[2];
-	int		status;
 	pid_t	child1;
 	pid_t	child2;
 
 	if (pipe(tube))
-		return (perror("pipe error"));
+		return (perror("pipe"));
 	child1 = fork();
 	if (child1 < 0)
-		return (perror("child1 error "));
+		return (perror(args[2]));
 	if (child1 == 0)
 		input_exec(fd1, args[2], tube, env);
 	child2 = fork();
 	if (child2 < 0)
-		return (perror("child2 error "));
+		return (perror(args[3]));
 	if (child2 == 0)
 		output_exec(fd2, args[3], tube, env);
 	close(tube[0]);
 	close(tube[1]);
-	waitpid(child2, &status, 0);
-	waitpid(child1, &status, 0);
+	waitpid(-1, 0, 0);
+	waitpid(-1, 0, 0);
 }
 
 int	main(int ac, char **av, char **env)
@@ -106,5 +121,5 @@ int	main(int ac, char **av, char **env)
 	}
 	else
 		write(2, "Invalid number of arguments\n", 29);
-	exit(0);
+	return (0);
 }
