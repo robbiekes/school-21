@@ -6,24 +6,11 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 17:55:28 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/02/09 18:57:55 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/14 14:54:57 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-// void	free_struct(char **args)
-// {
-// 	int	i;
-	
-// 	i = 0;
-// 	while (i < 4)
-// 	{
-// 		free(args[i]);
-// 		i++;
-// 	}
-// 	free(args);
-// }
 
 char	**set_args(char *cmd)
 {

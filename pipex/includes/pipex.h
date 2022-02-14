@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/02 18:11:08 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/02/09 17:23:21 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:56:15 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ char	*ft_strcat(char *dst, char *src);
 int		ft_strlen(char *s);
 char	*pathjoin(char *s1, char *s2);
 char	*ft_strdup(char *s1);
-void	free_struct(char **args);
+int		ft_strcmp(char *s1, char *s2);
 
 #endif

@@ -1,6 +1,0 @@
-LIMITER - any word ("puk", "kek", "pupa", etc.)
-if (av[1] == "here_doc" && av[2] == LIMITER)
-{
-	/*get next line*/
-	 
-}

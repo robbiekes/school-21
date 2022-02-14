@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 18:23:51 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/02/09 19:13:34 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/14 19:35:12 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,21 @@ void	child_exec(t_data *data, int i)
 	args = set_args(data->av[i]);
 	if (i == 2)
 	{
-		if (dup2(data->fd1, STDIN_FILENO) < 0 || dup2(data->tube2[1], STDOUT_FILENO) < 0)
+		if (dup2(data->fd1, 0) < 0 || dup2(data->tube2[1], 1) < 0)
 			perror_exit("dup2");
 	}
-	if (i == data->ac - 2)
+	else if (i == data->ac - 2)
 	{
-		if (dup2(data->tube1[0], STDIN_FILENO) < 0 || dup2(data->fd2, STDOUT_FILENO) < 0)
+		if (dup2(data->tube1[0], 0) < 0 || dup2(data->fd2, 1) < 0)
 			perror_exit("dup2");
 	}
 	else
 	{
-		if (dup2(data->tube1[0], STDIN_FILENO) < 0 || dup2(data->tube2[1], STDOUT_FILENO) < 0)
+		if (dup2(data->tube1[0], 0) < 0 || dup2(data->tube2[1], 1) < 0)
+		{
+			write(1, "55\n", 3);
 			perror_exit("dup2");
+		}
 	}
 	close(data->tube1[0]);
 	close(data->tube1[1]);
@@ -59,17 +62,17 @@ void	child_exec(t_data *data, int i)
 	exit(0);
 }
 
-void	pipex_advanced(t_data *data)
+int	pipex_advanced(t_data *data)
 {
 	int	i;
+	int	status;
 	int	child_proc;
-	
-	i = 2;
-	child_proc = 0;
+
+	i = 2 + (data->limiter != 0);
 	while (i < data->ac - 1)
 	{
 		if (pipe(data->tube2))
-			return (perror("pipe"));
+			perror_exit("pipe");
 		child_proc = fork();
 		if (child_proc < 0)
 			perror_exit(data->av[i]);
@@ -82,14 +85,34 @@ void	pipex_advanced(t_data *data)
 		i++;
 	}
 	while (i-- > 2)
-		waitpid(-1, 0, 0);
+		waitpid(-1, &status, 0);
+	return (status);
 }
 
-int main(int ac, char **av, char **env)
+void	get_input(t_data *data)
 {
-	t_data *data;
+	char	*line;
+	
+	if (pipe(data->tube1))
+		perror_exit("pipe");
+	line = get_next_line(0);
+	while (ft_strcmp(line, data->limiter) != 10) // 10 == \n
+	{
+		write(data->tube1[1], line, ft_strlen(line));
+		free(line);
+		line = 0;
+		line = get_next_line(0);
+	}
+	free(line);
+}
 
-	if (ac == 5)
+int	main(int ac, char **av, char **env)
+{
+	t_data	*data;
+	int		status;
+	
+	status = 1;
+	if (ac >= 5)
 	{
 		data = (t_data *)malloc(sizeof(t_data));
 		if (data == 0)
@@ -97,69 +120,27 @@ int main(int ac, char **av, char **env)
 		data->ac = ac;
 		data->env = env;
 		data->av = av;
-		data->fd1 = open(av[1], O_RDONLY);
-		data->fd2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC | 0644);
-		if (data->fd1 < 0)
-			perror_exit(av[1]);
-		else if (data->fd2 < 0)
+		data->limiter = 0;
+		if (!ft_strcmp(av[1], "here_doc"))
+		{
+			data->limiter = av[2];
+			get_input(data);
+		}
+		else
+		{
+			data->fd1 = open(av[1], O_RDONLY);
+			if (data->fd1 < 0)
+				perror_exit(av[1]);
+		}
+		data->fd2 = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (data->fd2 < 0)
 			perror_exit(av[ac - 1]);
-		// if (pipe(data->tube[0]))
-		// 	return (perror("pipe"));
-		pipex_advanced(data);
+		status = pipex_advanced(data);
 		close(data->fd1);
 		close(data->fd2);
 		free(data);
 	}
 	else
 		write(2, "Invalid number of arguments\n", 29);
-	return (0);
+	return (status);
 }
-
-
-
-
-
-
-// int	pipex_advanced(int ac, char **av, t_data *file_data)
-// {
-// 	int	i;
-// 	int	pipe_count;
-// 	static int	tube[2][2] = {-1, -1, -1, -1};
-	
-// 	i = 3;
-// 	pipe_count = 0;
-// 	while (i < ac)
-// 	{
-// 		if (pipe(tube[pipe_count]))
-// 			return (perror("pipe"));
-		
-// 	}
-// }
-
-// int	main(int ac, char **av, char **env)
-// {
-// 	t_data *file_data;
-	
-// 	file_data = (t_data *)malloc(sizeof(t_data));
-// 	file_data->fd1 = 0;
-// 	file_data->fd2 = 0;
-// 	if (ac >= 5)
-// 	{
-// 		file_data->fd1 = open(av[1], O_RDONLY);
-// 		file_data->fd2 = open(av[4], O_WRONLY | O_CREAT | O_TRUNC | 0644);
-// 		if (file_data->fd1 < 0)
-// 		{
-// 			perror(av[1]);
-// 			exit(2);
-// 		}
-// 		else if (file_data->fd2 < 0)
-// 		{
-// 			perror(av[4]);
-// 			exit(2);
-// 		}
-// 		pipex_advanced(ac, av, file_data);
-// 	}
-// 	else
-// 		write(2, "Invalid number of arguments\n", 29);
-// 	exit(0);
-// }

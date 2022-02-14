@@ -6,26 +6,18 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/08 13:12:54 by mgwyness          #+#    #+#             */
-/*   Updated: 2021/10/12 19:08:56 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:47:19 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strcmp(char *s1, char *s2, size_t n)
 {
-	char	*arr1;
-	char	*arr2;
-	size_t	i;
+	int	i;
 
 	i = 0;
-	arr1 = (char *)s1;
-	arr2 = (char *)s2;
-	while (i < n)
-	{
-		if ((arr1[i] != arr2[i]) || arr1[i] == '\0' || arr2[i] == '\0')
-			return ((int)((unsigned char)arr1[i] - (unsigned char)arr2[i]));
+	while ((s1[i] != s2[i]) || s1[i] == '\0' || s2[i] == '\0')
 		i++;
-	}
-	return (0);
+	return ((int)((unsigned char)s1[i] - (unsigned char)s2[i]));
 }
