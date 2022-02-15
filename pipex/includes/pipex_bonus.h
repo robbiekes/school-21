@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 18:24:20 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/02/14 17:30:51 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/15 20:30:31 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char	*ft_strdup(char *s1);
 int		ft_strcmp(char *s1, char *s2);
 char	*get_next_line(int fd);
 void	get_input(t_data *data);
-
+void	perror_exit(char *message);
+void	get_input(t_data *data);
+void	init_data(t_data *data, int ac, char **av, char **env);
 
 #endif

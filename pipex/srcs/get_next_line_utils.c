@@ -6,22 +6,12 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 16:46:56 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/02/14 17:31:06 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/15 17:52:49 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "pipex_bonus.h"
-
-// size_t	ft_strlen(const char *s)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (s[i] != '\0')
-// 		i++;
-// 	return (i);
-// }
 
 int	str_len(char *reserved)
 {
