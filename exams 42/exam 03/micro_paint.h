@@ -1,19 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils2_mand.c                                      :+:      :+:    :+:   */
+/*   micro_paint.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/15 17:52:58 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/02/15 19:05:48 by mgwyness         ###   ########.fr       */
+/*   Created: 2022/02/17 18:14:15 by mgwyness          #+#    #+#             */
+/*   Updated: 2022/02/17 20:23:38 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#ifndef MICRO_PAINT_H
+# define MICRO_PAINT_H
 
-void	perror_exit(char *message)
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+
+typedef struct s_field
 {
-	perror(message);
-	exit(1);
-}
+	int		width;
+	int		height;
+	char	background;
+} 			t_field;
+
+typedef struct s_shape
+{
+	char	rect_type;
+	int		width;
+	int		height;
+	int		x;
+	int		y;
+	char	c;
+
+}			t_shape;
+
+#endif
