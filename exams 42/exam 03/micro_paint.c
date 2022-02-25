@@ -138,9 +138,6 @@ void	print_field(t_data *data)
 int main(int ac, char **av)
 {
 	t_data *data = (t_data *)malloc(sizeof(t_data));
-	data->width = 0;
-	data->height = 0;
-	data->background = 0;
 	if (ac != 2)
 		return (error_args());
 	if (!(data->file = fopen(av[1], "r")))

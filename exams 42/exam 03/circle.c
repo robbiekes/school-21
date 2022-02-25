@@ -145,5 +145,7 @@ int main(int ac, char **av)
 	init_field(data);
 	rect_args(data);
 	print_rect(data);
+
+	fclose(data->file);
 	return (0);
 }
