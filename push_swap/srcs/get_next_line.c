@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 17:18:03 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/01/10 21:40:13 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/02/26 15:02:17 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_read_fill(char *buf, char *reserved, int fd)
 {
-	int	count;
+	int	count; 
 
 	count = 0;
 	while (!ft_strchr(reserved, '\n'))
