@@ -2,6 +2,9 @@
 
 // TODO: add ft_atoi()
 
+
+int	init_data(t_data *data, ) // malloc philos, threads and so on
+
 int	init_phil_data(t_philo **philo, int ac, char **av)
 {
 	*philo = (t_philo *)malloc(sizeof(t_philo));
@@ -71,12 +74,24 @@ void	*philosophers(void *arg)
 	// if philo-1 and philo+1 didn't eat and 
 }
 
+int check_args(int ac, char **av)
+{
+	if (ac > 6 || ac < 5)
+	{
+		write(2, "Not enough arguments\n", 21);
+		return (1);
+	}
+}
+
 int main(int ac, char **av)
 {
 	int		i;
 	t_philo	*philo;
-	p_data	*data;
-	check_args(ac, av);
+	t_data	*data;
+	
+	if (check_args(ac, av))
+		return (1);
+
 	if (init_phil_data(&philo, ac, av))
 		return (1);
 
