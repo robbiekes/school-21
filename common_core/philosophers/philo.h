@@ -23,16 +23,16 @@ typedef struct s_fork
 
 typedef struct s_philo // info about ONE philosopher
 {
-	int		philo_num;
-	int 	time_to_eat; //in ms
-	int 	time_to_die; //in ms
-	int 	time_to_sleep; //in ms
-	int		each_must_eat; // how many time each philo must eat
-	int		last_meal; // in ms - when each philo eated last time
-	int		*must_die;
-	t_fork	*right;
-	t_fork	*left;
-	int		start_time;
+	int				own_num;
+	unsigned int	time_to_eat; //in ms
+	unsigned int	time_to_die; //in ms
+	unsigned int	time_to_sleep; //in ms
+	int				each_must_eat; // how many time each philo must eat
+	unsigned int	last_meal; // tv_sec (sec), tv_usec(mcs)
+	int				*must_die;
+	t_fork			*right;
+	t_fork			*left;
+	int				start_time; // in ms
 } t_philo;
 
 typedef struct s_data // info about all threads and 
@@ -44,24 +44,11 @@ typedef struct s_data // info about all threads and
 	int			must_die;
 } t_data;
 
-//typedef struct s_philo 
-//{
-//	int		philo_num; // == num of threads
-//	int 	time_to_eat; //in ms
-//	int 	time_to_die; //in ms
-//	int 	time_to_sleep; //in ms
-//	int		each_must_eat; // how many time each philo must eat
-//	int		last_meal; // in ms - when each philo eated last time
-//	int		must_die;
-//	p_mutex	*left_fork;
-//	p_mutex	*right_fork;
-//}	t_philo;
 
-//typedef struct s_data
-//{
-//	p_mutex		*forks;
-//	pthread_t	*thread_ids;
-//	t_philo		**philo;
-//}	p_data;
+// free
+void	free_all(t_data *data);
+
+// time value
+unsigned int	get_time_ms(void);
 
 #endif
