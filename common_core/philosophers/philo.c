@@ -39,7 +39,8 @@ int	init_phil_data(t_data *data, int ac, char **av)
 			data->philos[i]->each_must_eat = ft_atoi(av[5]);
 		else
 			data->philos[i]->each_must_eat = -1;
-		data->philos[i]->must_die = 0; // ??????
+		data->philos[i]->must_die = 0;
+		// data->philos[i]->write_mutex = 0;
 	}
 	return (0);
 }

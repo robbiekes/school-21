@@ -19,21 +19,22 @@ typedef struct s_fork
 {
 	p_mutex	mutex;
 	int		num;
-} t_fork;
+}			t_fork;
 
 typedef struct s_philo // info about ONE philosopher
 {
-	int				own_num;
 	unsigned int	time_to_eat; //in ms
 	unsigned int	time_to_die; //in ms
 	unsigned int	time_to_sleep; //in ms
+	unsigned int	last_meal; // in ms
+	int				own_num;
 	int				each_must_eat; // how many time each philo must eat
-	unsigned int	last_meal; // tv_sec (sec), tv_usec(mcs)
-	int				*must_die;
+	int				*must_die; // turns into 1 when philo died and checked by is_dead()
+	int				start_time; // all philos must start eating at the same time
 	t_fork			*right;
 	t_fork			*left;
-	int				start_time; // in ms
-} t_philo;
+	pthread_t		write_mutex; // purpose?????????????
+}					t_philo;
 
 typedef struct s_data // info about all threads and 
 {
@@ -42,7 +43,7 @@ typedef struct s_data // info about all threads and
 	pthread_t	*thread_ids;
 	t_philo		**philos;
 	int			must_die;
-} t_data;
+}				t_data;
 
 
 // free
