@@ -9,7 +9,13 @@ SRCDIR		= ./srcs/
 OBJDIR		= ./obj/
 INCDIR		= ./includes/
 
-SRCS			= main.c	philo.c
+SRCS			= main.c \
+				philo.c	\
+				destroy_mutexes.c \
+				init.c \
+				time.c \
+				utils.c
+				
 OBJS			= $(addprefix $(OBJDIR), $(SRCS:.c=.o))
 
 all: $(NAME)

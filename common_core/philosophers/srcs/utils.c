@@ -6,9 +6,11 @@
 /*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 21:43:29 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/04/22 21:43:40 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/04/24 02:22:33 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philo.h"
 
 int	ft_atoi(char *str)
 {
@@ -36,4 +38,31 @@ int	ft_atoi(char *str)
 		i++;
 	}
 	return (ans);
+}
+
+void	print_message(t_philo *philo, char *msg)
+{
+	pthread_mutex_lock(&(philo->message_mutex));
+	printf("%d\n", msg);
+}
+
+void	ft_usleep(unsigned int ms)
+{
+	unsigned int	current_time;
+	unsigned int	start_sleeping;
+
+	current_time = get_time_ms();
+	start_sleeping = current_time;
+	while (current_time - start_sleeping < ms)
+	{
+		usleep(100); // 1/10 ms
+		current_time = get_time_ms();
+	}
+}
+
+void	free_all(t_data *data) //////////////
+{
+	free(data->forks);
+	free(data->philos);
+	free(data->thread_ids);
 }
