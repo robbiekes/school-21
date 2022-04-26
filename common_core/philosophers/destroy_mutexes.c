@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_mutexes.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 11:39:25 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/04/26 16:06:57 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:34:09 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

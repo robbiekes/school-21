@@ -1,14 +1,12 @@
 CC			= gcc
 RM			= rm -rf
-CFLAGS		= -Wall -Wextra -Werror -Ofast -MMD -fsanitize=thread
-#-fsanitize=address 
-#-fsanitize=thread
+CFLAGS		= -Wall -Wextra -Werror -Ofast -MMD
 
 NAME		= philo
 
-SRCDIR		= ./src
+SRCDIR		= ./
 OBJDIR		= ./build
-INCDIR		= ./includes
+INCDIR		= ./
 
 SRC			=	$(SRCDIR)/main.c \
 				$(SRCDIR)/init.c \
