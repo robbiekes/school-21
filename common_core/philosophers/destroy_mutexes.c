@@ -6,7 +6,7 @@
 /*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 11:39:25 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/04/26 16:34:09 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:38:02 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	check_death(t_data *data)
 		all_ate = 1;
 		while (++i < data->philo_num)
 		{
-			if (!data->each_must_eat || \
-				data->philos[i].meal_count < data->each_must_eat)
+			if (!data->each_must_eat
+				|| data->philos[i].meal_count < data->each_must_eat)
 				all_ate = 0;
 			if (is_dead(data, i))
 			{

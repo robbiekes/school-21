@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 21:43:29 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/04/26 15:33:56 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:39:00 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	print_message(t_philo *philo, char *msg)
 	pthread_mutex_lock(philo->message_mutex);
 	if (msg)
 	{
-		printf("%lld %d %s\n", get_time_ms() - philo->start_time, \
-		philo->own_num + 1, msg);
+		printf("%lld %d %s\n", get_time_ms() - philo->start_time,
+			philo->own_num + 1, msg);
 		pthread_mutex_unlock(philo->message_mutex);
 	}
 	else
-		printf("%lld %d %s\n", get_time_ms() - philo->start_time, \
-		philo->own_num + 1, "has died");
+		printf("%lld %d %s\n", get_time_ms() - philo->start_time,
+			philo->own_num + 1, "has died");
 }
 
 void	free_all(t_data *data)

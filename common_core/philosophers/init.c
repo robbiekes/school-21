@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 11:40:18 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/04/26 16:11:49 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:38:40 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	init_data(t_data *data, int ac, char **av)
 	data->philos = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
 	if (!(data->philos))
 		return (1);
-	data->thread_ids = (pthread_t *)malloc(sizeof(pthread_t) * \
-			data->philo_num);
+	data->thread_ids = (pthread_t *)malloc(sizeof(pthread_t)
+			* data->philo_num);
 	if (!(data->thread_ids))
 		return (1);
 	if (pthread_mutex_init(&(data->message_mutex), 0))
@@ -61,8 +61,8 @@ int	init_phil_data(t_data *data, char **av)
 		data->philos[i].own_num = i;
 		data->philos[i].time_to_eat = time_to_eat;
 		data->philos[i].time_to_sleep = time_to_sleep;
-		data->philos[i].left = data->forks + (i + (data->philo_num - 1)) % \
-		data->philo_num;
+		data->philos[i].left = data->forks + (i + (data->philo_num - 1))
+			% data->philo_num;
 		data->philos[i].right = data->forks + i;
 		data->philos[i].start_time = start_time;
 		data->philos[i].last_meal = start_time;

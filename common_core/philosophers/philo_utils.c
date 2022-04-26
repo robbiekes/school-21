@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgwyness <mgwyness@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: mgwyness <mgwyness@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/26 11:58:34 by mgwyness          #+#    #+#             */
-/*   Updated: 2022/04/26 16:10:19 by mgwyness         ###   ########.fr       */
+/*   Updated: 2022/04/26 16:36:41 by mgwyness         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	create_threads(t_data *data)
 	while (++i < data->philo_num)
 	{
 		if (pthread_create(&(data->thread_ids[i]), 0, philosophers,
-			data->philos + i))
+				data->philos + i))
 		{
 			i = -1;
 			while (data->thread_ids[++i])
