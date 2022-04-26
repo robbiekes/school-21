@@ -1,33 +1,34 @@
 CC			= gcc
 RM			= rm -rf
-CFLAGS		= -Wall -Wextra -Werror
-# CFLAGS		= -fsanitize=thread
+CFLAGS		= -Wall -Wextra -Werror -Ofast -MMD -fsanitize=thread
+#-fsanitize=address 
+#-fsanitize=thread
 
 NAME		= philo
 
-SRCDIR		= ./srcs/
-OBJDIR		= ./obj/
-INCDIR		= ./includes/
+SRCDIR		= ./src
+OBJDIR		= ./build
+INCDIR		= ./includes
 
-SRCS			= main.c \
-				philo.c	\
-				destroy_mutexes.c \
-				init.c \
-				time.c \
-				utils.c
-				
-OBJS			= $(addprefix $(OBJDIR), $(SRCS:.c=.o))
+SRC			=	$(SRCDIR)/main.c \
+				$(SRCDIR)/init.c \
+				$(SRCDIR)/time.c \
+				$(SRCDIR)/philo.c \
+				$(SRCDIR)/lib_utils.c \
+				$(SRCDIR)/philo_utils.c \
+				$(SRCDIR)/destroy_mutexes.c
+
+OBJ			= $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SRC))
+DEP			= $(OBJ:.o=.d)
 
 all: $(NAME)
 
-$(OBJDIR)%.o : $(SRCDIR)%.c $(INCDIR)philo.h Makefile
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(INCDIR) -Ofast
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
-$(NAME): $(OBJDIR) $(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
-
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
+$(OBJDIR)/%.o : $(SRCDIR)/%.c Makefile
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@ -I$(INCDIR)
 
 clean:
 	$(RM) $(OBJDIR)
@@ -37,10 +38,6 @@ fclean: clean
 
 re: fclean all
 
-#test: $(NAME)
-#	./$(NAME) 5 800 200 200 2
+-include $(DEP)
 
-#test_die: $(NAME)
-#	./$(NAME) 4 310 200 100
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re
