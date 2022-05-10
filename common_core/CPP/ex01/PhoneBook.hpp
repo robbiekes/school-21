@@ -2,6 +2,7 @@
 # define PHONEBOOK_HPP
 
 # include <iostream>
+# include <iomanip>
 # include "Contact.hpp"
 
 # define PHONEBOOK_SIZE 8
@@ -18,7 +19,8 @@ public:
 
 	void add();
 	void search();
-	void displayPhoneBook();
+	void displayPhoneBook(int index);
+	void searchByIndex();
 };
 
 #endif
