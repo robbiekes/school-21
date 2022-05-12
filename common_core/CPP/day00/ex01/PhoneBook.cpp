@@ -20,7 +20,7 @@ void PhoneBook::searchByIndex()
 	else
 	{
 		displayHeader();
-		displayPhoneBook(index);
+		displayPhoneBook(index - 1);
 	}
 }
 

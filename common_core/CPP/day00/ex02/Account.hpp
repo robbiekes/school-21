@@ -40,6 +40,7 @@ public:
 
 private:
 
+	// info about all account holders
 	static int	_nbAccounts;
 	static int	_totalAmount;
 	static int	_totalNbDeposits;
@@ -47,10 +48,11 @@ private:
 
 	static void	_displayTimestamp( void );
 
+	// info about one person
 	int				_accountIndex;
-	int				_amount;
-	int				_nbDeposits;
-	int				_nbWithdrawals;
+	int				_amount; // initial deposit
+	int				_nbDeposits; // how many times deposits were made by a holder 
+	int				_nbWithdrawals; // how much time person took money from his/her account
 
 	Account( void );
 

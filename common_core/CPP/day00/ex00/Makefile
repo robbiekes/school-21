@@ -1,16 +1,14 @@
 CC			= c++
 RM			= rm -rf
-CFLAGS		= -Wall -Wextra -Werror -Ofast -MMD
+CFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-NAME		= phone
+NAME		= megaphone
 
 SRCDIR		= ./
 OBJDIR		= ./build
 INCDIR		= ./
 
-SRC			= $(SRCDIR)/PhoneBook.cpp \
-			  $(SRCDIR)/Contact.cpp \
-			  $(SRCDIR)/main.cpp
+SRC			= $(SRCDIR)/megaphone.cpp
 
 OBJ			= $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRC))
 DEP			= $(OBJ:.o=.d)

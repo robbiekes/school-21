@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <functional>
 #include "Account.hpp"
+#include <iostream>
 
 
 int		main( void ) {
@@ -62,7 +63,6 @@ int		main( void ) {
 
 	return 0;
 }
-
 
 // ************************************************************************** //
 // vim: set ts=4 sw=4 tw=80 noexpandtab:                                      //

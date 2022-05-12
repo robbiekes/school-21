@@ -1,14 +1,15 @@
 CC			= c++
 RM			= rm -rf
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -Ofast -MMD -std=c++98
 
-NAME		= megaphone
+NAME		= account
 
 SRCDIR		= ./
 OBJDIR		= ./build
 INCDIR		= ./
 
-SRC			= $(SRCDIR)/megaphone.cpp
+SRC			= $(SRCDIR)/Account.cpp \
+			  $(SRCDIR)/tests.cpp
 
 OBJ			= $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRC))
 DEP			= $(OBJ:.o=.d)
