@@ -8,7 +8,8 @@ SRCDIR		= ./
 OBJDIR		= ./build
 INCDIR		= ./
 
-SRC			= $(SRCDIR)/main.cpp 
+SRC			= $(SRCDIR)/main.cpp \
+			  $(SRCDIR)/Replace.cpp
 
 OBJ			= $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRC))
 DEP			= $(OBJ:.o=.d)
