@@ -1,6 +1,13 @@
 #include "Point.hpp"
 
 /*
+	Coordinates of a triangle: А(х1,у1), B(х2,у2), Point(х3,у3).  We need to know whether a Point is on the left or on the right of the line AB;
+	The formula is: D = (х3 - х1) * (у2 - у1) - (у3 - у1) * (х2 - х1)
+
+	- If D = 0, Point is on the line;
+	- If D < 0, Point is on the left of the line
+	- If D > 0, Point is on the right of the line
+
 	We've been given the coordinates of a triangle ABC and a point P.
 	Is the point P to the left of or to the right of both the lines AB and AC?
 	If true, it can't be inside. If false, it is at least inside the "cones" that satisfy the condition. 
