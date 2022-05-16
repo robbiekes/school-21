@@ -72,6 +72,6 @@ Fixed& Fixed::operator=(const Fixed &other)
 
 std::ostream& operator<<(std::ostream& out, const Fixed &obj)
 {
-	out << obj.getRawBits();
+	out << obj.toFloat();
 	return out;
 }

@@ -10,6 +10,6 @@ int main()
 	Zombie *dude2 = newZombie("Max");
 	dude2->announce();
 
-	delete dude2;
+	// delete dude2;
 	return 0;
 }

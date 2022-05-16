@@ -24,19 +24,17 @@ Round x to the nearest whole number (e.g. round(x))
 Store the rounded x in an integer container
 */
 
-Fixed::Fixed() : fixedPointNum(0) { std::cout << "Default constructor called" << std::endl; }
-Fixed::~Fixed() { std::cout << "Destructor called" << std::endl; }
-Fixed::Fixed(const Fixed &other) : fixedPointNum(other.fixedPointNum) { std::cout << "Copy constructor called" << std::endl; }
+Fixed::Fixed() : fixedPointNum(0) {}
+Fixed::~Fixed() {}
+Fixed::Fixed(const Fixed &other) : fixedPointNum(other.fixedPointNum) {}
 
 Fixed::Fixed(const int num)
 {
-	std::cout << "A constant integer constructor called" << std::endl;
 	fixedPointNum = num << bits;
 }
 
 Fixed::Fixed(const float num)
 {
-	std::cout << "A constant float constructor called" << std::endl;
 	fixedPointNum = roundf(num * (1 << bits));
 }
 
@@ -52,19 +50,16 @@ float Fixed::toFloat() const
 
 int Fixed::getRawBits( void ) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return fixedPointNum;
 }
 
 void Fixed::setRawBits( int const raw )
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	this->fixedPointNum = raw;
 }
 
 Fixed& Fixed::operator=(const Fixed &other)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 		this->fixedPointNum = other.fixedPointNum;
 	return *this;
