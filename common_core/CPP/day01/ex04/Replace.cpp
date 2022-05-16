@@ -19,15 +19,25 @@ void Replace::rewrite()
 {
 	std::ifstream inStream(filename);
 	std::string line, tmpBuf;
-	while (getline(inStream, line))
-	{
-		replace_line(line);
-		tmpBuf.append(line);
-		tmpBuf.append("\n");
-	}
+	if (inStream.is_open())
+    {
+		while (getline(inStream, line))
+		{
+			replace_line(line);
+			tmpBuf.append(line);
+			tmpBuf.append("\n");
+		}
+    }
+	else
+		std::cout << "Could not access file." << std::endl;
 	std::ofstream outStream;
 	outStream.open(filename.append(".replace"), std::ios::out);
-	outStream << tmpBuf;
-	inStream.close();
-	outStream.close();
+	if (outStream.is_open())
+    {
+		outStream << tmpBuf;
+		inStream.close();
+		outStream.close();
+    }
+    else
+		std::cout << "Could not open file." << std::endl;
 }
