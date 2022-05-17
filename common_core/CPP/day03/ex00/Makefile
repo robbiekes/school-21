@@ -2,7 +2,7 @@ CC			= c++
 RM			= rm -rf
 CFLAGS		= -Wall -Wextra -Werror -Ofast -MMD -std=c++98
 
-NAME		= fixed
+NAME		= ClapTrap
 
 SRCDIR		= ./
 OBJDIR		= ./build
