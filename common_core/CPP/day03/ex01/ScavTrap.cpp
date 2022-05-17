@@ -16,10 +16,10 @@ ScavTrap::ScavTrap(const std::string name) : ClapTrap(name)
 	hitPoints = 100;
 	energyPoints = 50;
 	attackDamage = 20;
-	std::cout << "ScavTrap copy constructor called" << std::endl;
+	std::cout << "ScavTrap constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) {} // определить поля вручную, если не сработает
+ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other) { std::cout << "ScavTrap constructor called" << std::endl; } // определить поля вручную, если не сработает
 
 ScavTrap& ScavTrap::operator=(const ScavTrap &other)
 {
@@ -36,19 +36,15 @@ ScavTrap& ScavTrap::operator=(const ScavTrap &other)
 
 void ScavTrap::attack(std::string const target)
 {
-	if (energyPoints > 0)
+	if (!hitPoints)
+		std::cout << "ScavTrap " << name << "is dead" << std::endl;
+	if (!energyPoints)
+		std::cout << "Cannot attack, not enough energy" << std::endl;
+	else
 	{
 		std::cout << "ScavTrap " << name << " attacks " << target << ", causing " << attackDamage << " points of damage!" << std::endl;
 		energyPoints--;
 	}
-	else
-		std::cout << "ClapTrap " << name << " attacks " << target << ", causing " << attackDamage << " points of damage!" << std::endl;
 }
 
 void ScavTrap::guardGate() { std::cout << "ScavTrap " << name << " is now in Gate keeper mode" << std::endl; }
-
-std::ostream& operator<<(std::ostream& out, ScavTrap const &other)
-{
-	out << other;
-	return out;
-}

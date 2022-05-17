@@ -4,6 +4,16 @@
 
 ClapTrap::ClapTrap() : name(""), hitPoints(10), energyPoints(10), attackDamage(0) { std::cout << "Default constructor is called" << std::endl; }
 ClapTrap::~ClapTrap() { std::cout << "Destructor is called" << std::endl; }
+ClapTrap::ClapTrap(ClapTrap const &other)
+{
+	if (this != &other)
+	{
+		name = other.name;
+		hitPoints = other.hitPoints;
+		energyPoints = other.energyPoints;
+		attackDamage = other.attackDamage;
+	}
+}
 ClapTrap::ClapTrap(std::string name) : name(name), hitPoints(10), energyPoints(10), attackDamage(10) { std::cout << "Constructor is called" << std::endl; }
 ClapTrap& ClapTrap::operator=(ClapTrap const &other)
 {
@@ -19,13 +29,15 @@ ClapTrap& ClapTrap::operator=(ClapTrap const &other)
 
 void ClapTrap::attack(const std::string& target)
 {
-	if (energyPoints > 0)
+	if (!hitPoints)
+		std::cout << "ClapTrap " << name << "is dead" << std::endl;
+	if (!energyPoints)
+		std::cout << "Cannot attack, not enough energy" << std::endl;
+	else
 	{
 		std::cout << "ClapTrap " << name << " attacks " << target << ", causing " << attackDamage << " points of damage!" << std::endl;
 		energyPoints--;
 	}
-	else
-		c
 }
 
 void ClapTrap::beRepaired(unsigned int amount)

@@ -13,9 +13,11 @@ public:
 	ScavTrap& operator=(const ScavTrap &other);
 	void attack(std::string const target);
 	void guardGate();
-
 };
 
-// std::ostream& operator<<(std::ostream& out, ScavTrap const &other);
+//std::ostream& operator<<(std::ostream &out, ScavTrap const &obj)
+//{
+
+//}
 
 #endif

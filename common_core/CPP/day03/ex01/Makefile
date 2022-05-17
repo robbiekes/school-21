@@ -2,14 +2,15 @@ CC			= c++
 RM			= rm -rf
 CFLAGS		= -Wall -Wextra -Werror -Ofast -MMD -std=c++98
 
-NAME		= ClapTrap
+NAME		= ScavTrap
 
 SRCDIR		= ./
 OBJDIR		= ./build
 INCDIR		= ./
 
 SRC			= $(SRCDIR)/main.cpp \
-			  $(SRCDIR)/ClapTrap.cpp
+			  $(SRCDIR)/ClapTrap.cpp \
+			  $(SRCDIR)/ScavTrap.cpp
 
 
 OBJ			= $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRC))
