@@ -38,17 +38,14 @@ std::string const& Character::getName() const { return name; }
 void Character::equip(AMateria* m)
 {
 	for (int i = 0; i < 4; i++)
-		if (i < 4 && slots[i] == nullptr)
+		if (!slots[i])
 			slots[i] = m;
 }
 
 void Character::unequip(int idx)
 {
 	if (idx < 4 && slots[idx])
-	{
-		delete slots[idx];
 		slots[idx] = nullptr;
-	}
 }
 
 void Character::use(int idx, ICharacter& target)
