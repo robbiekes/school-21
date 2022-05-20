@@ -8,7 +8,7 @@ Character::~Character()
 		delete slots[i];
 }
 
-Character::Character(const std::string name) : name(name) {}
+Character::Character(const std::string name) : name(name), slots() {}
 
 Character::Character(const Character &other)
 {
@@ -45,7 +45,10 @@ void Character::equip(AMateria* m)
 void Character::unequip(int idx)
 {
 	if (idx < 4 && slots[idx])
+	{
+		delete slots[idx];
 		slots[idx] = nullptr;
+	}
 }
 
 void Character::use(int idx, ICharacter& target)
