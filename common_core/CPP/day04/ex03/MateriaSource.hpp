@@ -1,8 +1,9 @@
 #ifndef MATERIA_SOURCE_HPP
 # define MATERIA_SOURCE_HPP
 
-# include "AMateria.hpp"
 # include "IMateriaSource.hpp"
+# include "Ice.hpp"
+# include "Cure.hpp"
 
 class MateriaSource : public IMateriaSource
 {
@@ -12,9 +13,9 @@ public:
 	MateriaSource();
 	MateriaSource(const MateriaSource &other);
 	MateriaSource& operator=(const MateriaSource &other);
-	virtual ~MateriaSource() {}
+	virtual ~MateriaSource();
 	virtual void learnMateria(AMateria *);
-	virtual AMateria* createMateria(std::string const & type);
+	virtual AMateria* createMateria(std::string const &type);
 };
 
 #endif

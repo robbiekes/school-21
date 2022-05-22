@@ -5,8 +5,6 @@
 
 class Cure : public AMateria
 {
-	std::string name;
-
 public:
 	Cure();
 	Cure(const Cure &other);

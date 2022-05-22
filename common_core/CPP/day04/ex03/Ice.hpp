@@ -5,8 +5,6 @@
 
 class Ice : public AMateria
 {
-	std::string name;
-
 public:
 	Ice();
 	Ice(const Ice &other);

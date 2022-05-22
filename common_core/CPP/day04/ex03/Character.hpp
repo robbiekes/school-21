@@ -1,10 +1,9 @@
 #ifndef CHARACTER_HPP
 # define CHARACTER_HPP
 
-# include <iostream>
 # include "ICharacter.hpp"
 
-class Character
+class Character : public ICharacter
 {
 	std::string name;
 	AMateria *slots[4];
@@ -14,7 +13,7 @@ public:
 	Character(const std::string name);
 	Character(const Character &other);
 	Character& operator=(const Character &other);
-	virtual ~Character() {}
+	virtual ~Character();
 	virtual std::string const & getName() const;
 	virtual void equip(AMateria* m);
 	virtual void unequip(int idx);

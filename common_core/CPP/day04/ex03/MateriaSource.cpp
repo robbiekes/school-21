@@ -33,11 +33,16 @@ MateriaSource::~MateriaSource()
 
 void MateriaSource::learnMateria(AMateria *materia)
 {
-	for (int i = 0; i < 4; i++)
+	if (materia)
 	{
-		if (materias[i] == nullptr)
-			materias[i] = materia->clone();
-		return ;
+		for (int i = 0; i < 4; i++)
+		{
+			if (materias[i] == nullptr)
+			{
+				materias[i] = materia->clone();
+				return ;
+			}
+		}
 	}
 }
 
